@@ -9,7 +9,7 @@ export default function Articles({ posts }: { posts: PostMetadata[] }) {
       {posts.map((post) => (
         <li key={post.slug}>
           <div className={styles.title}>
-            <Link href={`/posts/${post.slug}`}>{post.title}</Link>
+            <Link href={`/blog/${post.slug}`}>{post.title}</Link>
           </div>
           <p>{post.excerpt}</p>
           <p className={styles.tags}>

@@ -18,17 +18,23 @@ import Callout from "@/src/components/Callout";
 
 interface MDXPost {
   source: MDXRemoteSerializeResult<Record<string, unknown>>;
-  meta: PostMetadata;
+  metadata: PostMetadata;
 }
 
 export default function PostPage({ post }: { post: MDXPost }) {
-  console.log(post);
+  // export default function PostPage({ meta }: MDXPost) {
+  // console.log(post?.metadata);
   return (
     <div>
       <Head>
-        <title>{post?.meta?.title}</title>
+        <title>{post?.metadata?.title}</title>
       </Head>
-      <h1>{post?.meta?.title}</h1>
+      <div className="text-4xl p-4 text-center lg:text-6xl lg:p-10">
+        {post?.metadata?.title}
+      </div>
+      <div className="text-sm p-4 text-center italic lg:text-base after:content-[''] after:w-1/4 after:h-1 after:bg-gray-600 after:block after:m-auto after:mt-8 after:mb-10">
+        {post?.metadata?.excerpt}
+      </div>
       <MDXRemote
         {...post.source}
         components={{
@@ -36,12 +42,12 @@ export default function PostPage({ post }: { post: MDXPost }) {
           Callout,
           h1: (props: any) => <H1 {...props} />,
           h2: (props: any) => <H2 {...props} />,
-          p: (props: any) => <p {...props} className="mb-4 text-[#EAE6E5]" />,
+          p: (props: any) => <p {...props} className="mb-4" />,
           // code: (props: any) => <code {...props} className="mt-3" />,
         }}
       />
       <div className="flex justify-center">
-        <div className="w-2/3 h-1 bg-black mt-8 mb-8"></div>
+        <div className="w-1/4 h-1 bg-black mt-8 mb-8"></div>
       </div>
     </div>
   );
@@ -50,7 +56,7 @@ export default function PostPage({ post }: { post: MDXPost }) {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { slug } = params as { slug: string };
   const { content, metadata } = getPostFromSlug(slug);
-  // console.log(content);
+  // console.log(metadata);
   const mdxSource = await serialize(content, {
     mdxOptions: {
       rehypePlugins: [

@@ -18,7 +18,7 @@ const Navbar = () => {
     },
     {
       name: "blog",
-      to: "/posts",
+      to: "/blog",
     },
   ];
 
