@@ -2,7 +2,6 @@ import path from "path";
 import { sync } from "glob";
 import fs from "fs";
 import matter from "gray-matter";
-// import { Post } from "../interface/Post";
 import { Post } from "../interfaces/Post";
 
 const POSTS_PATH = path.join(process.cwd(), "posts");
@@ -14,7 +13,6 @@ export const getSlugs = (): string[] => {
     const parts = path.split("/");
     const fileName = parts[parts.length - 1];
     const [slug, _] = fileName.split(".");
-    // console.log(slug);
 
     return slug;
   });
