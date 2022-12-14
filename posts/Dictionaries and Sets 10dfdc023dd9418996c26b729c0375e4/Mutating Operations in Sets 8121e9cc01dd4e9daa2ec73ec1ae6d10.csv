@@ -1,0 +1,5 @@
+﻿Operation,Method Equivalent,What they do?
+s1 -= s2,s1.difference_update(s2),Performs difference (-) operation between the 2 (or more) sets and puts in s1. So id(s1) remains the same. Note the order.
+s1 |= s2,s1.update(s2),Performs union (|) operation between the 2 (or more) sets and puts in s1. So id(s1) remains the same.
+s1 &= s2,s1.intersection_update(s2),Performs intersection (&) operation between the 2 (or more) sets and puts in s1. So id(s1) remains the same.
+s1 ^= s2,s1.symmetric_difference_update(s2),Performs symmetric difference (^) operation between the 2 (or more) sets and puts in s1. So id(s1) remains the same.
