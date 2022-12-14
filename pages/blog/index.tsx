@@ -15,7 +15,7 @@ export default function Blog({ posts }: { posts: PostMetadata[] }) {
           className={
             currentIndex > posts?.length
               ? "bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow hover:cursor-not-allowed mb-4 "
-              : "bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow mb-4 "
+              : "bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow mb-4"
           }
         >
           Load more posts

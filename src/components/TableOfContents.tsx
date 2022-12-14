@@ -12,14 +12,8 @@ export interface ITableOfContentArray {
 }
 
 const TableOfContents = ({ contents }: ITableOfContentArray) => {
-  useEffect(() => {
-    // console.log(contents, typeof contents);
-    // console.log(heading, url, level);
-    console.log(contents);
-  }, []);
-
   return (
-    <div className="bg-slate-300 my-4">
+    <div className="mb-4 mt-0 italic border-2 border-black rounded-lg">
       <ul>
         {contents.map((content) => {
           return (
@@ -29,7 +23,11 @@ const TableOfContents = ({ contents }: ITableOfContentArray) => {
             >
               <li
                 key={content?.url}
-                className={content?.level === 3 ? "list-square" : "list-disc"}
+                className={
+                  content?.level === 3
+                    ? "list-square list-inside"
+                    : "list-disc list-inside"
+                }
               >
                 <Link href={content.url} key={content.url}>
                   {content.heading}

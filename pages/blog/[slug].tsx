@@ -26,7 +26,7 @@ interface MDXPost {
 }
 
 export default function PostPage({ post }: { post: MDXPost }) {
-  const [showToc, showTocToggle] = useState(true);
+  const [showToc, showTocToggle] = useState(false);
   return (
     <div>
       <Head>
@@ -38,9 +38,14 @@ export default function PostPage({ post }: { post: MDXPost }) {
       <div className="text-sm p-4 text-center italic lg:text-base after:content-[''] after:w-1/4 after:h-1 after:bg-gray-600 after:block after:m-auto after:mt-8 after:mb-10 bg-slate-200">
         {post?.metadata?.excerpt}
       </div>
-      <button onClick={() => showTocToggle(!showToc)} className="">
-        {showToc ? "Hide" : "Show"} table of contents?
-      </button>
+      <div className="flex justify-center m-3 mb-0">
+        <button
+          onClick={() => showTocToggle(!showToc)}
+          className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow mb-4"
+        >
+          {showToc ? "Hide" : "Show"} table of contents?
+        </button>
+      </div>
       {showToc && <TableOfContents contents={post?.headings} />}
       <MDXRemote
         {...post.source}
@@ -78,8 +83,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { slug } = params as { slug: string };
   const { content, metadata } = getPostFromSlug(slug);
   const headings = await getHeadings(content, metadata);
-  console.log("below are the headings");
-  console.log(headings);
 
   const mdxSource = await serialize(content, {
     mdxOptions: {
