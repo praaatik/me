@@ -6,6 +6,10 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    listStyleType: {
+      square: "square",
+      disc: "disc",
+    },
     extend: {
       content: {
         lightbulb: 'url("/images/lightbulb.svg")',

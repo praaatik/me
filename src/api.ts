@@ -3,6 +3,8 @@ import { sync } from "glob";
 import fs from "fs";
 import matter from "gray-matter";
 import { Post } from "../interfaces/Post";
+import { PostMetadata } from "interfaces/PostMetadata";
+import { ITableOfContent } from "./components/TableOfContents";
 
 const POSTS_PATH = path.join(process.cwd(), "posts");
 
@@ -46,4 +48,24 @@ export const getPostFromSlug = (slug: string): Post => {
       date: (data.date ?? new Date()).toString(),
     },
   };
+};
+
+export const getHeadings = async (post: string, metadata: PostMetadata) => {
+  const headingLines = post.split("\n").filter((line) => {
+    return line.match(/^###*\s/);
+  });
+
+  return headingLines.map((raw) => {
+    const heading = raw.replace(/^###*\s/, "");
+    const level = raw.slice(0, 3) === "###" ? 3 : 2;
+    // console.log(metadata);
+    const url = `${metadata?.slug}/#${heading
+      .toLowerCase()
+      .split(" ")
+      .join("-")}`;
+    // console.log(url);
+    return { heading, level, url };
+  });
+
+  // return headingLines;
 };

@@ -7,24 +7,26 @@ import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeHighlight from "rehype-highlight";
 import "highlight.js/styles/atom-one-dark.css";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { PostMetadata } from "../../interfaces/PostMetadata";
-import { getPostFromSlug, getSlugs } from "../../src/api";
+import { getHeadings, getPostFromSlug, getSlugs } from "../../src/api";
 import H1, { Props } from "../../src/components/H1";
 import Navbar from "../../src/components/Navbar";
 import H2 from "@/src/components/H2";
 import Callout from "@/src/components/Callout";
 import H3 from "@/src/components/H3";
-// import ImageComponent from "@/src/components/Image";
+import TableOfContents, {
+  ITableOfContent,
+} from "@/src/components/TableOfContents";
 
 interface MDXPost {
   source: MDXRemoteSerializeResult<Record<string, unknown>>;
   metadata: PostMetadata;
+  headings: ITableOfContent[];
 }
 
 export default function PostPage({ post }: { post: MDXPost }) {
-  // export default function PostPage({ meta }: MDXPost) {
-  // console.log(post?.metadata);
+  const [showToc, showTocToggle] = useState(true);
   return (
     <div>
       <Head>
@@ -36,6 +38,10 @@ export default function PostPage({ post }: { post: MDXPost }) {
       <div className="text-sm p-4 text-center italic lg:text-base after:content-[''] after:w-1/4 after:h-1 after:bg-gray-600 after:block after:m-auto after:mt-8 after:mb-10 bg-slate-200">
         {post?.metadata?.excerpt}
       </div>
+      <button onClick={() => showTocToggle(!showToc)} className="">
+        {showToc ? "Hide" : "Show"} table of contents?
+      </button>
+      {showToc && <TableOfContents contents={post?.headings} />}
       <MDXRemote
         {...post.source}
         components={{
@@ -46,12 +52,11 @@ export default function PostPage({ post }: { post: MDXPost }) {
           h3: (props: any) => <H3 {...props} />,
           p: (props: any) => <p {...props} className="mb-4" />,
           aside: (props: any) => (
-            <aside {...props} className="bg-slate-200 p-5 rounded-md my-4" />
+            <aside {...props} className="bg-slate-200 p-5 rounded-lg my-4" />
           ),
           li: (props: any) => (
             <li {...props} className="list-disc leading-relaxed my-1 " />
           ),
-          // ul: (props: any) => <ul {...props} className="bg-slate-30" />,
           inlineCode: (props: any) => {
             return (
               <div
@@ -72,7 +77,10 @@ export default function PostPage({ post }: { post: MDXPost }) {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { slug } = params as { slug: string };
   const { content, metadata } = getPostFromSlug(slug);
-  // console.log(metadata);
+  const headings = await getHeadings(content, metadata);
+  console.log("below are the headings");
+  console.log(headings);
+
   const mdxSource = await serialize(content, {
     mdxOptions: {
       rehypePlugins: [
@@ -83,7 +91,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     },
   });
 
-  return { props: { post: { source: mdxSource, metadata } } };
+  return { props: { post: { source: mdxSource, metadata, headings } } };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
