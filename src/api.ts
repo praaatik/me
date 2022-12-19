@@ -8,42 +8,6 @@ import { ITableOfContent } from "./components/TableOfContents";
 
 const POSTS_PATH = path.join(process.cwd(), "posts");
 
-// function readFiles(dir: string) {
-//   // read directory
-//   fs.readdir(dir, (error, fileNames) => {
-//     if (error) throw error;
-
-//     fileNames.forEach((filename) => {
-//       // get current file name
-//       const name = path.parse(filename).name;
-//       // get current file extension
-//       const ext = path.parse(filename).ext;
-//       // get current file path
-//       const filepath = path.resolve(dir, filename);
-
-//       // get information about the file
-//       fs.stat(filepath, function (error, stat) {
-//         if (error) throw error;
-
-//         // check if the current path is a file or a folder
-//         const isFile = stat.isFile();
-
-//         // exclude folders
-//         if (isFile) {
-//           // callback, do something with the file
-//           // processFile(filepath, name, ext, stat);
-//           console.log(name);
-//           fs.readFile(`${dir}/${name}.mdx`, "utf-8", function (err, content) {
-//             console.log(content.charAt(content.indexOf("- ")));
-//           });
-//         }
-//       });
-//     });
-//   });
-// }
-
-// readFiles(`${process.cwd()}/posts`);
-
 export const getSlugs = (): string[] => {
   const paths = sync(`${POSTS_PATH}/*.mdx`);
 
@@ -82,6 +46,8 @@ export const getPostFromSlug = (slug: string): Post => {
       title: data.title ?? slug,
       tags: (data.tags ?? []).sort(),
       date: (data.date ?? new Date()).toString(),
+      external: data?.external,
+      url: data?.url,
     },
   };
 };
