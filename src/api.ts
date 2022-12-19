@@ -60,10 +60,39 @@ export const getHeadings = async (post: string, metadata: PostMetadata) => {
   return headingLines.map((raw) => {
     const heading = raw.replace(/^###*\s/, "");
     const level = raw.slice(0, 3) === "###" ? 3 : 2;
-    const url = `${metadata?.slug}/#${heading
+    let url = `${metadata?.slug}/#${heading
       .toLowerCase()
       .split(" ")
       .join("-")}`;
+
+    if (url.includes(".")) {
+      console.log(url);
+      url = url.split(".").join("");
+    }
+    if (url.includes("`")) {
+      url = url.split("`").join("");
+    }
+
+    if (url.includes("*") || url.includes("**")) {
+      url = url.split("*").join("");
+    }
+
+    if (url.includes("(")) {
+      url = url.split("(").join("");
+    }
+
+    if (url.includes(")")) {
+      url = url.split(")").join("");
+    }
+
+    if (url.includes("?")) {
+      url = url.split("?").join("");
+    }
+
+    if (url.includes("_")) {
+      url = url.split("_").join("");
+    }
+
     return { heading, level, url };
   });
 };
