@@ -65,7 +65,7 @@ export default function PostPage({ post }: { post: MDXPost }) {
                 return (
                   <div
                     {...props}
-                    className="bg-zinc-700 text-red-400 p-1 m-1 text-sm inline"
+                    className="bg-zinc-700 text-red-300 p-1 px-2 m-1 text-sm italic inline"
                   />
                 );
               },
@@ -74,8 +74,6 @@ export default function PostPage({ post }: { post: MDXPost }) {
         </div>
       </div>
 
-      {/* <div className="toc">table of contents</div> */}
-      {/* </div> */}
       <div className="flex justify-center">
         <div className="w-1/4 h-1 bg-black mt-8 mb-8"></div>
       </div>
@@ -93,7 +91,12 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       rehypePlugins: [
         rehypeSlug,
         [rehypeAutolinkHeadings, { behavior: "wrap" }],
-        rehypeHighlight,
+        [
+          rehypeHighlight,
+          {
+            detect: true,
+          },
+        ],
       ],
     },
   });

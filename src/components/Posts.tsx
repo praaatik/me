@@ -44,9 +44,9 @@ export default function Posts({ posts }: { posts: PostMetadata[] }) {
                 key={post.slug}
                 className="border-2 p-2 rounded cursor-pointer"
               >
-                <div className="lg:text-2xl text-xl flex">
+                <div className="lg:text-2xl text-xl flex relative">
                   {post.title}
-                  <div className="border-2 border-green-200 mx-2 h-1/2">
+                  <div className="mx-2 h-1/2 hover:after:content-['External_link'] hover:after:block hover:after:text-xs  hover:after:absolute hover:after:-top-6">
                     {post?.external ? <FaExternalLinkAlt size={15} /> : <></>}
                   </div>
                 </div>
