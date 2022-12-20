@@ -17,6 +17,7 @@ import H3 from "@/src/components/H3";
 import TableOfContents, {
   ITableOfContent,
 } from "@/src/components/TableOfContents";
+import ScrollToTop from "@/src/components/ScrollToTop";
 
 interface MDXPost {
   source: MDXRemoteSerializeResult<Record<string, unknown>>;
@@ -77,6 +78,9 @@ export default function PostPage({ post }: { post: MDXPost }) {
       <div className="flex justify-center">
         <div className="w-1/4 h-1 bg-black mt-8 mb-8"></div>
       </div>
+      {/* <div className=" bg-slate-300"> */}
+      <ScrollToTop />
+      {/* </div> */}
     </div>
   );
 }
