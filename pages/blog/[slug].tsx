@@ -18,6 +18,7 @@ import TableOfContents, {
   ITableOfContent,
 } from "@/src/components/TableOfContents";
 import ScrollToTop from "@/src/components/ScrollToTop";
+import ReadingProgress from "@/src/components/ReadingProgress";
 
 interface MDXPost {
   source: MDXRemoteSerializeResult<Record<string, unknown>>;
@@ -29,6 +30,7 @@ export default function PostPage({ post }: { post: MDXPost }) {
   const [showToc, showTocToggle] = useState(false);
   return (
     <div>
+      <ReadingProgress />
       <Head>
         <title>{post?.metadata?.title}</title>
       </Head>
@@ -78,9 +80,7 @@ export default function PostPage({ post }: { post: MDXPost }) {
       <div className="flex justify-center">
         <div className="w-1/4 h-1 bg-black mt-8 mb-8"></div>
       </div>
-      {/* <div className=" bg-slate-300"> */}
       <ScrollToTop />
-      {/* </div> */}
     </div>
   );
 }

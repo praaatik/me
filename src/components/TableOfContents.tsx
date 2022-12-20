@@ -14,7 +14,7 @@ export interface ITableOfContentArray {
 const TableOfContents = ({ contents }: ITableOfContentArray) => {
   return (
     <div>
-      <div className=" lg:text-xl lg:text-center border-t-2 border-black border-b-2 py-2">
+      <div className=" lg:text-xl lg:text-center border-black border-b-2 py-2">
         Table of contents
       </div>
       <div className="mb-4 mt-0 mx-4 italic overflow-y-auto h-[85vh] text-sm py-2 leading-8">
