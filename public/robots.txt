@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.capsules.com
+
+# Sitemaps
+Sitemap: https://www.capsules.com/sitemap.xml

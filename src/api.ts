@@ -7,6 +7,8 @@ import { PostMetadata } from "interfaces/PostMetadata";
 import { ITableOfContent } from "./components/TableOfContents";
 
 const POSTS_PATH = path.join(process.cwd(), "posts");
+const deleteMe = 'deleteMe'
+console.log(deleteMe)
 
 export const getSlugs = (): string[] => {
   const paths = sync(`${POSTS_PATH}/*.mdx`);

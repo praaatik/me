@@ -1,5 +1,7 @@
 import React from "react";
 
 export default function Home() {
-  return <>{/* <Articles posts={posts} /> */}</>;
+  return <>
+    This should be the home page
+  </>;
 }
