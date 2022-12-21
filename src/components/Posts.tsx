@@ -32,7 +32,9 @@ export default function Posts({ posts }: { posts: PostMetadata[] }) {
         </ul>
       </div>
       <div className="posts">
-        <h1 className=" text-3xl p-4 px-0 ">Posts</h1>
+        <h1 className=" text-3xl p-4 px-0 " id="posts--heading">
+          Posts
+        </h1>
         <ul className={styles.list}>
           {posts.map((post) => (
             <CustomLink
@@ -44,7 +46,10 @@ export default function Posts({ posts }: { posts: PostMetadata[] }) {
                 key={post.slug}
                 className="border-2 p-2 rounded cursor-pointer"
               >
-                <div className="lg:text-2xl text-xl flex relative">
+                <div
+                  className="lg:text-2xl text-xl flex relative"
+                  id="post-title"
+                >
                   {post.title}
                   <div className="mx-2 h-1/2 hover:after:content-['External_link'] hover:after:block hover:after:text-xs  hover:after:absolute hover:after:-top-6">
                     {post?.external ? <FaExternalLinkAlt size={15} /> : <></>}
@@ -53,7 +58,7 @@ export default function Posts({ posts }: { posts: PostMetadata[] }) {
                 <p className="italic text-sm my-1 lg:text-base">
                   {post.excerpt}
                 </p>
-                <p className="flex">
+                <div className="flex">
                   {post.tags.map((tag) => (
                     <div
                       key={tag}
@@ -62,7 +67,7 @@ export default function Posts({ posts }: { posts: PostMetadata[] }) {
                       <Link href={`/tags/${tag}`}>{tag}</Link>
                     </div>
                   ))}
-                </p>
+                </div>
               </li>
             </CustomLink>
           ))}

@@ -23,7 +23,7 @@ const ScrollToTop = () => {
       {showButton && (
         <FaAngleUp
           size={40}
-          className="border-2 border-black cursor-pointer"
+          className="border-2 border-black rounded-full cursor-pointer"
           onClick={() => scrollUp()}
         />
       )}

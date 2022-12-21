@@ -66,7 +66,6 @@ export const getHeadings = async (post: string, metadata: PostMetadata) => {
       .join("-")}`;
 
     if (url.includes(".")) {
-      console.log(url);
       url = url.split(".").join("");
     }
     if (url.includes("`")) {
