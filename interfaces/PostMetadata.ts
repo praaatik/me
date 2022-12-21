@@ -4,4 +4,6 @@ export interface PostMetadata {
   title: string;
   tags: string[];
   date: string;
+  external?: boolean;
+  url?: string;
 }

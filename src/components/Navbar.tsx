@@ -13,22 +13,16 @@ const Navbar = () => {
       to: "/about",
     },
     {
-      name: "notes",
-      to: "/notes",
-    },
-    {
       name: "blog",
       to: "/blog",
     },
   ];
 
-  //   const dispatch = useDispatch();
   const [isClicked, isClickedSet] = useState(false);
   const handleNavbarHide = () => {
     const current = isClicked;
     return isClickedSet(!current);
   };
-  //   const history = useHistory();
   return (
     <>
       <nav className="">

@@ -17,6 +17,8 @@ import H3 from "@/src/components/H3";
 import TableOfContents, {
   ITableOfContent,
 } from "@/src/components/TableOfContents";
+import ScrollToTop from "@/src/components/ScrollToTop";
+import ReadingProgress from "@/src/components/ReadingProgress";
 
 interface MDXPost {
   source: MDXRemoteSerializeResult<Record<string, unknown>>;
@@ -28,6 +30,7 @@ export default function PostPage({ post }: { post: MDXPost }) {
   const [showToc, showTocToggle] = useState(false);
   return (
     <div>
+      <ReadingProgress />
       <Head>
         <title>{post?.metadata?.title}</title>
       </Head>
@@ -37,43 +40,47 @@ export default function PostPage({ post }: { post: MDXPost }) {
       <div className="text-sm p-4 text-center italic lg:text-base after:content-[''] after:w-1/4 after:h-1 after:bg-gray-600 after:block after:m-auto after:mt-8 after:mb-10 bg-slate-200">
         {post?.metadata?.excerpt}
       </div>
-      <div className="flex justify-center m-3 mb-0">
-        <button
-          onClick={() => showTocToggle(!showToc)}
-          className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow mb-4"
-        >
-          {showToc ? "Hide" : "Show"} table of contents?
-        </button>
+      <div className="flex justify-center m-3 mb-0"></div>
+      <div className="flex flex-row-reverse justify-center lg:justify-around">
+        <div className="lg:sticky lg:top-0 lg:h-fit lg:inline hidden ">
+          <TableOfContents contents={post?.headings} />
+        </div>
+        <div className="w-2/3 mx-0">
+          <MDXRemote
+            {...post.source}
+            components={{
+              Image,
+              Callout,
+              h1: (props: any) => <H1 {...props} />,
+              h2: (props: any) => <H2 {...props} />,
+              h3: (props: any) => <H3 {...props} />,
+              p: (props: any) => <p {...props} className="mb-4" />,
+              aside: (props: any) => (
+                <aside
+                  {...props}
+                  className="bg-slate-200 p-5 rounded-lg my-4"
+                />
+              ),
+              li: (props: any) => (
+                <li {...props} className="list-disc leading-relaxed my-1 " />
+              ),
+              inlineCode: (props: any) => {
+                return (
+                  <div
+                    {...props}
+                    className="bg-zinc-700 text-red-300 p-1 px-2 m-1 text-sm italic inline"
+                  />
+                );
+              },
+            }}
+          />
+        </div>
       </div>
-      {showToc && <TableOfContents contents={post?.headings} />}
-      <MDXRemote
-        {...post.source}
-        components={{
-          Image,
-          Callout,
-          h1: (props: any) => <H1 {...props} />,
-          h2: (props: any) => <H2 {...props} />,
-          h3: (props: any) => <H3 {...props} />,
-          p: (props: any) => <p {...props} className="mb-4" />,
-          aside: (props: any) => (
-            <aside {...props} className="bg-slate-200 p-5 rounded-lg my-4" />
-          ),
-          li: (props: any) => (
-            <li {...props} className="list-disc leading-relaxed my-1 " />
-          ),
-          inlineCode: (props: any) => {
-            return (
-              <div
-                {...props}
-                className="bg-zinc-700 text-red-400 p-1 m-1 text-sm inline"
-              />
-            );
-          },
-        }}
-      />
+
       <div className="flex justify-center">
         <div className="w-1/4 h-1 bg-black mt-8 mb-8"></div>
       </div>
+      <ScrollToTop />
     </div>
   );
 }
@@ -88,7 +95,12 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       rehypePlugins: [
         rehypeSlug,
         [rehypeAutolinkHeadings, { behavior: "wrap" }],
-        rehypeHighlight,
+        [
+          rehypeHighlight,
+          {
+            detect: true,
+          },
+        ],
       ],
     },
   });
