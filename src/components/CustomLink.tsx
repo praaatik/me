@@ -14,10 +14,6 @@ const CustomLink = ({ isExternal, href, children }: IProps) => {
     </a>
   ) : (
     <a href={href}>{children}</a>
-
-    // <Link passHref href={href}>
-    //   {children}
-    // </Link>
   );
 };
 

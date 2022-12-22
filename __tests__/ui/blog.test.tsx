@@ -3,6 +3,7 @@ import "@testing-library/jest-dom";
 import { getAllPosts } from "../../src/api";
 import Blog from "../../pages/blog/index";
 import { PostMetadata } from "interfaces/PostMetadata";
+import Posts from "@/src/components/Posts";
 
 var testPosts: PostMetadata[] = [
   {
@@ -17,18 +18,17 @@ var testPosts: PostMetadata[] = [
   },
 ];
 
-it("checks if the load posts button is present in the document", () => {
-  // const testPosts = getAllPosts().map((post) => post.metadata);
-  // console.log(testPosts[0]);
+var allTestPosts: PostMetadata[] = getAllPosts().map((post) => post.metadata);
+var onePost = allTestPosts.slice(0, 1);
 
+it("checks if the load posts button is present in the document", () => {
   render(<Blog posts={testPosts} />);
 
   const button = screen.getByText("Load more posts");
   expect(button).toBeDefined();
 });
 
-it("displays mssage if no post is present", () => {
-  // const testPosts = getAllPosts().map((post) => post.metadata);
+it("displays appropriate message if no post is present", () => {
   testPosts = [];
   render(<Blog posts={testPosts} />);
 
