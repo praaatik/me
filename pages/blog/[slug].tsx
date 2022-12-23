@@ -19,6 +19,7 @@ import TableOfContents, {
 } from "@/src/components/TableOfContents";
 import ScrollToTop from "@/src/components/ScrollToTop";
 import ReadingProgress from "@/src/components/ReadingProgress";
+import WebBookmark from "@/src/components/WebBookmark";
 
 interface MDXPost {
   source: MDXRemoteSerializeResult<Record<string, unknown>>;
@@ -51,10 +52,14 @@ export default function PostPage({ post }: { post: MDXPost }) {
             components={{
               Image,
               Callout,
+              WebBookmark,
               h1: (props: any) => <H1 {...props} />,
               h2: (props: any) => <H2 {...props} />,
               h3: (props: any) => <H3 {...props} />,
               p: (props: any) => <p {...props} className="mb-4" />,
+              // a: (props: any) => (
+              //   <WebBookmark href={props} className="bg-red-600" />
+              // ),
               aside: (props: any) => (
                 <aside
                   {...props}
