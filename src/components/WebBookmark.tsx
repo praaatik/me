@@ -57,11 +57,9 @@ const WebBookmark = ({ href }: Props) => {
 
   return (
     <a href={href} target={"_blank"} rel="noreferrer">
-      <div className="border-2 border-black p-4 flex row justify-evenly lg:mr-24 lg:ml-0 cursor-pointer">
+      <div className="border-2 border-black p-4 flex row justify-evenly lg:mr-24 lg:my-8 lg:ml-0 cursor-pointer hover:underline">
         <div className="flex flex-col justify-evenly lg:justify-around">
-          <div className="text-base lg:text-xl hover:underline">
-            {preview?.title}
-          </div>
+          <div className="text-base lg:text-xl">{preview?.title}</div>
           <div className="text-xs text-slate-700 mt-1 lg:text-sm">
             {preview?.description}
           </div>
