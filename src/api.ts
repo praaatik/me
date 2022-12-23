@@ -93,6 +93,10 @@ export const getHeadings = async (post: string, metadata: PostMetadata) => {
       url = url.split("_").join("");
     }
 
+    if (url.includes(":")) {
+      url = url.split(":").join("");
+    }
+
     return { heading, level, url };
   });
 };
