@@ -30,7 +30,7 @@ interface MDXPost {
 export default function PostPage({ post }: { post: MDXPost }) {
   const [showToc, showTocToggle] = useState(false);
   return (
-    <div>
+    <div className="">
       <ReadingProgress />
       <Head>
         <title>{post?.metadata?.title}</title>
@@ -46,7 +46,7 @@ export default function PostPage({ post }: { post: MDXPost }) {
         <div className="lg:sticky lg:top-0 lg:h-fit lg:inline hidden ">
           <TableOfContents contents={post?.headings} />
         </div>
-        <div className="w-2/3 mx-0">
+        <div className="lg:w-2/3 w-4/5 mx-0">
           <MDXRemote
             {...post.source}
             components={{
