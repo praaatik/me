@@ -7,7 +7,7 @@ import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeHighlight from "rehype-highlight";
 import "highlight.js/styles/atom-one-dark.css";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { PostMetadata } from "../../interfaces/PostMetadata";
 import { getHeadings, getPostFromSlug, getSlugs } from "../../src/api";
 import H1 from "../../src/components/H1";
@@ -20,6 +20,7 @@ import TableOfContents, {
 import ScrollToTop from "@/src/components/ScrollToTop";
 import ReadingProgress from "@/src/components/ReadingProgress";
 import WebBookmark from "@/src/components/WebBookmark";
+import { ThemeContext } from "pages/_app";
 
 interface MDXPost {
   source: MDXRemoteSerializeResult<Record<string, unknown>>;
@@ -27,18 +28,54 @@ interface MDXPost {
   headings: ITableOfContent[];
 }
 
+interface IPostPageStyles {
+  titleStyle: string;
+  excerptStyle: string;
+  containerStyle: string;
+}
+
 export default function PostPage({ post }: { post: MDXPost }) {
-  const [showToc, showTocToggle] = useState(false);
+  const isThemeDark = useContext(ThemeContext);
+
+  const lightStyles: IPostPageStyles = {
+    titleStyle:
+      "text-4xl p-4 text-center md:font-extrabold lg:text-6xl lg:p-10 bg-light-background-1",
+    excerptStyle:
+      "text-sm p-4 text-center italic lg:text-base after:content-[''] after:w-1/4 after:h-1 after:bg-light-sea after:block after:m-auto after:mt-8 after:mb-10 bg-light-background-1",
+    containerStyle: "text-dark-background-3",
+  };
+  const darkStyles: IPostPageStyles = {
+    titleStyle:
+      "text-4xl p-4 text-center lg:text-6xl md:font-extrabold lg:p-10 bg-dark-background-3",
+    excerptStyle:
+      "text-sm p-4 text-center italic lg:text-base after:content-[''] after:w-1/4 after:h-1 after:bg-gray-600 after:block after:m-auto after:mt-8 after:mb-10 bg-dark-background-3",
+    containerStyle: "text-light-background-3 bg-dark-background-3",
+  };
+
+  const styles = isThemeDark ? darkStyles : lightStyles;
+
   return (
-    <div className="">
+    <div
+      className={
+        isThemeDark ? darkStyles.containerStyle : lightStyles.containerStyle
+      }
+    >
       <ReadingProgress />
       <Head>
         <title>{post?.metadata?.title}</title>
       </Head>
-      <div className="text-4xl p-4 text-center lg:text-6xl lg:p-10 bg-slate-200">
+      <div
+        className={
+          isThemeDark ? darkStyles?.titleStyle : lightStyles?.titleStyle
+        }
+      >
         {post?.metadata?.title}
       </div>
-      <div className="text-sm p-4 text-center italic lg:text-base after:content-[''] after:w-1/4 after:h-1 after:bg-gray-600 after:block after:m-auto after:mt-8 after:mb-10 bg-slate-200">
+      <div
+        className={
+          isThemeDark ? darkStyles?.excerptStyle : lightStyles?.excerptStyle
+        }
+      >
         {post?.metadata?.excerpt}
       </div>
       <div className="flex justify-center m-3 mb-0"></div>

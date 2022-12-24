@@ -55,6 +55,10 @@ const WebBookmark = ({ href }: Props) => {
 
   useEffect(() => {}, [preview]);
 
+  useEffect(() => {
+    console.log(response?.isError);
+  }, [response?.isError]);
+
   return (
     <a href={href} target={"_blank"} rel="noreferrer">
       <div className="border-2 border-black p-4 flex row justify-evenly lg:mr-24 lg:my-8 lg:ml-0 cursor-pointer hover:underline">
@@ -64,7 +68,7 @@ const WebBookmark = ({ href }: Props) => {
             {preview?.description}
           </div>
         </div>
-        {preview && (
+        {preview && preview?.image !== "" && (
           <img
             src={preview?.image}
             alt={`Image for ${preview?.title}`}

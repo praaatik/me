@@ -5,21 +5,27 @@ import "@/styles/globals.css";
 import React from "react";
 import Navbar from "../src/components/Navbar";
 
-function MyApp({ Component, pageProps }: AppProps) {
-  const theme = "darkTheme";
-  const stylesDark = `h-full w-screen m-0 bg-darkTheme-background-1 text-darkTheme-color-mid`;
-  const stylesLight = `h-full w-screen m-0 bg-darkTheme-color-mid text-darkTheme-background-1`;
-  return (
-    <div className="">
-      <div className="container lg:px-52 px-8 ">
-        <Head>
-          <title>Pratik Kulkarni</title>
-        </Head>
+const isThemeDark = false;
+export const ThemeContext = React.createContext(isThemeDark);
 
-        <Navbar />
-        <Component {...pageProps} />
+function MyApp({ Component, pageProps }: AppProps) {
+  return (
+    <ThemeContext.Provider value={isThemeDark}>
+      <div
+        className={
+          isThemeDark ? "bg-dark-background-3" : "bg-light-background-1"
+        }
+      >
+        <div className="container lg:px-52 px-8">
+          <Head>
+            <title>Pratik Kulkarni</title>
+          </Head>
+
+          <Navbar />
+          <Component {...pageProps} />
+        </div>
       </div>
-    </div>
+    </ThemeContext.Provider>
   );
 }
 
