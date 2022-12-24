@@ -21,6 +21,7 @@ import ScrollToTop from "@/src/components/ScrollToTop";
 import ReadingProgress from "@/src/components/ReadingProgress";
 import WebBookmark from "@/src/components/WebBookmark";
 import { ThemeContext } from "pages/_app";
+import BlockQuote from "@/src/components/BlockQuote";
 
 interface MDXPost {
   source: MDXRemoteSerializeResult<Record<string, unknown>>;
@@ -48,11 +49,11 @@ export default function PostPage({ post }: { post: MDXPost }) {
     titleStyle:
       "text-4xl p-4 text-center lg:text-6xl md:font-extrabold lg:p-10 bg-dark-background-3",
     excerptStyle:
-      "text-sm p-4 text-center italic lg:text-base after:content-[''] after:w-1/4 after:h-1 after:bg-gray-600 after:block after:m-auto after:mt-8 after:mb-10 bg-dark-background-3",
+      "text-sm p-4 text-center italic lg:text-base after:content-[''] after:w-1/4 after:h-1 after:bg-dark-marshmellow after:block after:m-auto after:mt-8 after:mb-10 bg-dark-background-3",
     containerStyle: "text-light-background-3 bg-dark-background-3",
   };
 
-  const styles = isThemeDark ? darkStyles : lightStyles;
+  // const styles = isThemeDark ? darkStyles : lightStyles;
 
   return (
     <div
@@ -78,7 +79,7 @@ export default function PostPage({ post }: { post: MDXPost }) {
       >
         {post?.metadata?.excerpt}
       </div>
-      <div className="flex justify-center m-3 mb-0"></div>
+      {/* <div className="flex justify-center m-3 mb-0"></div> */}
       <div className="flex flex-row-reverse justify-center lg:justify-around">
         <div className="lg:sticky lg:top-0 lg:h-fit lg:inline hidden ">
           <TableOfContents contents={post?.headings} />
@@ -94,13 +95,10 @@ export default function PostPage({ post }: { post: MDXPost }) {
               h2: (props: any) => <H2 {...props} />,
               h3: (props: any) => <H3 {...props} />,
               p: (props: any) => <p {...props} className="mb-4" />,
-              // a: (props: any) => (
-              //   <WebBookmark href={props} className="bg-red-600" />
-              // ),
-              aside: (props: any) => (
-                <aside
+              blockquote: (props: any) => (
+                <BlockQuote
                   {...props}
-                  className="bg-slate-200 p-5 rounded-lg my-4"
+                  // className="bg-dark-marshmellow p-5 rounded-lg my-4 after:w-full after:h-full after:block after:m-auto"
                 />
               ),
               li: (props: any) => (

@@ -5,7 +5,7 @@ import "@/styles/globals.css";
 import React from "react";
 import Navbar from "../src/components/Navbar";
 
-const isThemeDark = false;
+const isThemeDark = true;
 export const ThemeContext = React.createContext(isThemeDark);
 
 function MyApp({ Component, pageProps }: AppProps) {

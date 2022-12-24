@@ -12,9 +12,6 @@ module.exports = {
     },
 
     extend: {
-      content: {
-        lightbulb: 'url("/images/lightbulb.svg")',
-      },
       colors: {
         dark: {
           "background-1": "hsl(274, 4%, 16%)",
