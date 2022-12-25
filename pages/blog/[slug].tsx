@@ -36,13 +36,13 @@ interface IPostPageStyles {
 }
 
 export default function PostPage({ post }: { post: MDXPost }) {
-  const isThemeDark = useContext(ThemeContext);
+  const context = useContext(ThemeContext);
 
   const lightStyles: IPostPageStyles = {
     titleStyle:
       "text-4xl p-4 text-center md:font-extrabold lg:text-6xl lg:p-10 bg-light-background-1",
     excerptStyle:
-      "text-sm p-4 text-center italic lg:text-base after:content-[''] after:w-1/4 after:h-1 after:bg-light-sea after:block after:m-auto after:mt-8 after:mb-10 bg-light-background-1",
+      "text-sm p-4 text-center italic lg:text-base after:content-[''] after:w-1/4 after:h-1 after:bg-light-rose after:block after:m-auto after:mt-8 after:mb-10 bg-light-background-1",
     containerStyle: "text-dark-background-3",
   };
   const darkStyles: IPostPageStyles = {
@@ -53,12 +53,12 @@ export default function PostPage({ post }: { post: MDXPost }) {
     containerStyle: "text-light-background-3 bg-dark-background-3",
   };
 
-  // const styles = isThemeDark ? darkStyles : lightStyles;
-
   return (
     <div
       className={
-        isThemeDark ? darkStyles.containerStyle : lightStyles.containerStyle
+        context?.isThemeDark
+          ? darkStyles.containerStyle
+          : lightStyles.containerStyle
       }
     >
       <ReadingProgress />
@@ -67,14 +67,18 @@ export default function PostPage({ post }: { post: MDXPost }) {
       </Head>
       <div
         className={
-          isThemeDark ? darkStyles?.titleStyle : lightStyles?.titleStyle
+          context?.isThemeDark
+            ? darkStyles?.titleStyle
+            : lightStyles?.titleStyle
         }
       >
         {post?.metadata?.title}
       </div>
       <div
         className={
-          isThemeDark ? darkStyles?.excerptStyle : lightStyles?.excerptStyle
+          context?.isThemeDark
+            ? darkStyles?.excerptStyle
+            : lightStyles?.excerptStyle
         }
       >
         {post?.metadata?.excerpt}

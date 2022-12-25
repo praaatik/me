@@ -1,6 +1,8 @@
 import Link from "next/link";
-import React from "react";
+import { ThemeContext } from "pages/_app";
+import React, { useContext } from "react";
 import { useState } from "react";
+import { FiMoon, FiSun } from "react-icons/fi";
 
 const Navbar = () => {
   const links = [
@@ -17,6 +19,12 @@ const Navbar = () => {
       to: "/blog",
     },
   ];
+  const context = useContext(ThemeContext);
+
+  const changeTheme = () => {
+    const currentTheme = context?.isThemeDark;
+    context?.isThemeDarkToggle(!currentTheme);
+  };
 
   const [isClicked, isClickedSet] = useState(false);
   const handleNavbarHide = () => {
@@ -58,12 +66,7 @@ const Navbar = () => {
               </button>
             </div>
             <div className="flex w-full justify-around items-end p-3 sm:items-stretch sm:justify-between">
-              <div
-                className="flex-shrink-0 flex items-center"
-                // onClick={() => {
-                //   history.push("/");
-                // }}
-              >
+              <div className="flex-shrink-0 flex items-center">
                 <h1>Pratik Kulkarni</h1>
               </div>
               <div className="hidden sm:block sm:ml-6">
@@ -71,15 +74,16 @@ const Navbar = () => {
                   {links.map((link) => {
                     // in case the link is for Logout, display with an onclick for dispatch
                     return (
-                      <Link
-                        href={link.to}
-                        // className="text-black-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                        key="123"
-                      >
+                      <Link href={link.to} key={link?.name}>
                         {link.name}
                       </Link>
                     );
                   })}
+                  {context?.isThemeDark ? (
+                    <FiSun onClick={() => changeTheme()} />
+                  ) : (
+                    <FiMoon onClick={() => changeTheme()} />
+                  )}
                 </div>
               </div>
             </div>
@@ -96,7 +100,7 @@ const Navbar = () => {
                 <a
                   href={link.to}
                   className=" text-black-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                  key="123"
+                  key={link?.name}
                 >
                   {link.name}
                 </a>

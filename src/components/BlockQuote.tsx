@@ -13,25 +13,27 @@ interface IBlockQuoteStyles {
 const BlockQuote = (props: any) => {
   const darkStyles: IBlockQuoteStyles = {
     containerStyles:
-      "bg-dark-marshmellow rounded-lg relative p-10 border-4 border-black",
+      "bg-dark-marshmellow rounded-lg relative p-10 border-4 border-dark-mid",
   };
 
   const lightStyles: IBlockQuoteStyles = {
     containerStyles:
-      "bg-light-peach rounded-lg relative p-10 border-4 border-black",
+      "bg-light-peach rounded-lg relative p-10 border-4 border-light-rose",
   };
 
-  const isThemeDark = useContext(ThemeContext);
+  const context = useContext(ThemeContext);
 
   return (
     <>
       <div
         className={
-          isThemeDark ? darkStyles.containerStyles : lightStyles.containerStyles
+          context?.isThemeDark
+            ? darkStyles.containerStyles
+            : lightStyles.containerStyles
         }
       >
         <div {...props}></div>
-        {isThemeDark ? (
+        {context?.isThemeDark ? (
           <HiLightBulb className="absolute m-auto left-0 top-0" size={40} />
         ) : (
           <HiOutlineLightBulb

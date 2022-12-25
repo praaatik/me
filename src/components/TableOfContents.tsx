@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { useEffect } from "react";
+import { ThemeContext } from "pages/_app";
+import { useContext, useEffect } from "react";
 
 export interface ITableOfContent {
   heading: string;
@@ -7,14 +8,35 @@ export interface ITableOfContent {
   url: string;
 }
 
+interface ITOCPageStyles {
+  headingStyles: string;
+}
+
 export interface ITableOfContentArray {
   contents: ITableOfContent[];
 }
 
 const TableOfContents = ({ contents }: ITableOfContentArray) => {
+  const context = useContext(ThemeContext);
+
+  const lightStyles: ITOCPageStyles = {
+    headingStyles:
+      " lg:text-xl lg:text-center border-light-rose border-b-2 py-2",
+  };
+  const darkStyles: ITOCPageStyles = {
+    headingStyles:
+      " lg:text-xl lg:text-center border-dark-peach border-b-2 py-2",
+  };
+
   return (
     <div>
-      <div className=" lg:text-xl lg:text-center border-black border-b-2 py-2">
+      <div
+        className={
+          context?.isThemeDark
+            ? darkStyles.headingStyles
+            : lightStyles.headingStyles
+        }
+      >
         Table of contents
       </div>
       <div className="mb-4 mt-0 mx-4 italic overflow-y-auto h-[85vh] text-sm py-2 leading-8">
