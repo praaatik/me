@@ -1,13 +1,10 @@
 import { ThemeContext } from "pages/_app";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { HiOutlineLightBulb, HiLightBulb } from "react-icons/hi";
+import IBlockQuoteStyles from "../interfaces/IBlockQuoteStyles";
 
 export interface Props {
   data: any;
-}
-
-interface IBlockQuoteStyles {
-  containerStyles: string;
 }
 
 const BlockQuote = (props: any) => {
