@@ -8,32 +8,19 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeHighlight from "rehype-highlight";
 import "highlight.js/styles/atom-one-dark.css";
 import React, { useContext, useState } from "react";
-import { PostMetadata } from "../../interfaces/PostMetadata";
 import { getHeadings, getPostFromSlug, getSlugs } from "../../src/api";
 import H1 from "../../src/components/H1";
 import H2 from "@/src/components/H2";
 import Callout from "@/src/components/Callout";
 import H3 from "@/src/components/H3";
-import TableOfContents, {
-  ITableOfContent,
-} from "@/src/components/TableOfContents";
+import TableOfContents from "@/src/components/TableOfContents";
 import ScrollToTop from "@/src/components/ScrollToTop";
 import ReadingProgress from "@/src/components/ReadingProgress";
 import WebBookmark from "@/src/components/WebBookmark";
 import { ThemeContext } from "pages/_app";
 import BlockQuote from "@/src/components/BlockQuote";
-
-interface MDXPost {
-  source: MDXRemoteSerializeResult<Record<string, unknown>>;
-  metadata: PostMetadata;
-  headings: ITableOfContent[];
-}
-
-interface IPostPageStyles {
-  titleStyle: string;
-  excerptStyle: string;
-  containerStyle: string;
-}
+import IPostPageStyles from "@/src/interfaces/IPostPageStyles";
+import MDXPost from "@/src/interfaces/MDXPost";
 
 export default function PostPage({ post }: { post: MDXPost }) {
   const context = useContext(ThemeContext);

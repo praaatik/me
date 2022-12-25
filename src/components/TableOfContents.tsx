@@ -1,20 +1,9 @@
 import Link from "next/link";
 import { ThemeContext } from "pages/_app";
 import { useContext, useEffect } from "react";
-
-export interface ITableOfContent {
-  heading: string;
-  level: number;
-  url: string;
-}
-
-interface ITOCPageStyles {
-  headingStyles: string;
-}
-
-export interface ITableOfContentArray {
-  contents: ITableOfContent[];
-}
+import ITableOfContent from "../interfaces/ITableOfContent";
+import ITableOfContentArray from "../interfaces/ITableOfContentArray";
+import ITOCPageStyles from "../interfaces/ITOCPageStyles";
 
 const TableOfContents = ({ contents }: ITableOfContentArray) => {
   const context = useContext(ThemeContext);

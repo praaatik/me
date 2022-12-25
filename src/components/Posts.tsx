@@ -5,6 +5,7 @@ import { PostMetadata } from "../../interfaces/PostMetadata";
 import { FaExternalLinkAlt } from "react-icons/fa";
 import CustomLink from "./CustomLink";
 import { ThemeContext } from "pages/_app";
+import IPostStyles from "../interfaces/IPostStyles";
 
 export default function Posts({ posts }: { posts: PostMetadata[] }) {
   const [tags, tagsSet] = useState<string[]>();
@@ -15,15 +16,6 @@ export default function Posts({ posts }: { posts: PostMetadata[] }) {
       tagsSet((tags) => [...new Set(tags), ...new Set(post?.tags)]);
     });
   }, []);
-
-  interface IPostStyles {
-    tagsMetadataStyles: string;
-    tagsStyles: string;
-    tagsHeaderStyles: string;
-    postsHeaderStyles: string;
-    postsTitleStyles: string;
-    postsExcerptStyles: string;
-  }
 
   const darkStyles: IPostStyles = {
     tagsMetadataStyles:
