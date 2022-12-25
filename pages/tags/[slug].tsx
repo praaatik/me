@@ -2,7 +2,7 @@ import type { GetStaticProps, GetStaticPaths } from "next";
 import Head from "next/head";
 import { getAllPosts } from "@/src/api";
 import Posts from "@/src/components/Posts";
-import { PostMetadata } from "interfaces/PostMetadata";
+import { PostMetadata } from "@/src/interfaces/PostMetadata";
 
 export default function TagPage({
   slug,

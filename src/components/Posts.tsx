@@ -1,11 +1,11 @@
 import Link from "next/link";
 import styles from "@/styles/Articles.module.css";
 import React, { useContext, useEffect, useState } from "react";
-import { PostMetadata } from "../../interfaces/PostMetadata";
 import { FaExternalLinkAlt } from "react-icons/fa";
 import CustomLink from "./CustomLink";
 import { ThemeContext } from "pages/_app";
 import IPostStyles from "../interfaces/IPostStyles";
+import { PostMetadata } from "../interfaces/PostMetadata";
 
 export default function Posts({ posts }: { posts: PostMetadata[] }) {
   const [tags, tagsSet] = useState<string[]>();

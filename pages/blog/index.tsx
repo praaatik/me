@@ -1,6 +1,6 @@
 import { getAllPosts } from "@/src/api";
 import Posts from "@/src/components/Posts";
-import { PostMetadata } from "interfaces/PostMetadata";
+import { PostMetadata } from "@/src/interfaces/PostMetadata";
 import React, { useState } from "react";
 
 export default function Blog({ posts }: { posts: PostMetadata[] }) {

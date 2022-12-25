@@ -2,9 +2,8 @@ import path from "path";
 import { sync } from "glob";
 import fs from "fs";
 import matter from "gray-matter";
-import { Post } from "../interfaces/Post";
-import { PostMetadata } from "interfaces/PostMetadata";
-import { ITableOfContent } from "./components/TableOfContents";
+import { Post } from "./interfaces/Post";
+import { PostMetadata } from "./interfaces/PostMetadata";
 
 const POSTS_PATH = path.join(process.cwd(), "posts");
 
