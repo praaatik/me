@@ -27,7 +27,8 @@ const WebBookmark = ({ href }: Props) => {
     isLoading: false,
   });
 
-  const API_KEY = "8e5f900346d359c08898ce6c8d9eb784";
+  const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
+
   useEffect(() => {
     var data = { key: API_KEY, q: href };
     fetch("https://api.linkpreview.net", {
