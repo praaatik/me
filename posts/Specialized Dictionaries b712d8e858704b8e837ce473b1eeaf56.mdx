@@ -1,0 +1,64 @@
+---
+title: Specialized Dictionaries
+tags:
+  - react
+  - hooks
+  - javascript
+date: 2019-12-15
+excerpt: SWR is a great package from Zeit to help make it easier to fetch remote data with hooks. It is based on the stale-while-revalidate RFC.
+external: true
+url: https://praaatik.github.io/pytorch-deep-learning/intro.html
+---
+
+# Specialized Dictionaries
+
+---
+
+# Introduction
+
+- `defaultdict` - automatic default values for missing keys
+- `OrderedDict` - guaranteed key orderings
+- `Counter` - specialized tool for dealing with counters
+- `UserDict` - alternative to subclassing `dict` for creating custom dictionary types
+- `ChainMap` - efficient way to combine multiple dictionaries
+
+---
+
+# Default Dict
+
+- Part of the `collections` module.
+- If we need to set a default for a non-existent key, we can use this instead of the `dict()`.
+
+  ```python
+  def func():
+      return "default value"
+
+  d3 = defaultdict(func)
+
+  print(d3)
+  print(d3["a"])
+  print(d3)
+  print(d3["b"])
+  print(d3)
+  d3["c"] = "another value"
+  print(d3["c"])
+  print(d3)
+
+  """
+  defaultdict(<function func at 0x00000115C3368790>, {})
+  default value
+  defaultdict(<function func at 0x00000115C3368790>, {'a': 'default value'})
+  default value
+  defaultdict(<function func at 0x00000115C3368790>, {'a': 'default value', 'b': 'default value'})
+  another value
+  defaultdict(<function func at 0x00000115C3368790>, {'a': 'default value', 'b': 'default value', 'c': 'another value'})
+  """
+  ```
+
+- The first argument requires a callable to be passed in which handles the default value. This can include a function, lambda function, `list`, `int` (since these are callables as well).
+
+  ```python
+  int(), list(), int(4), list([1, 2, 3])
+
+  # (0, [], 4, [1, 2, 3])
+  ```

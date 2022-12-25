@@ -1,0 +1,258 @@
+---
+title: Context Managers
+tags:
+  - react
+  - hooks
+  - javascript
+date: 2019-12-15
+excerpt: This is a blog relating to context managers in Python.
+external: false
+url: ""
+---
+
+# Context Managers
+
+---
+
+# Content Managers
+
+- In simple terms → Context is the _state surrounding a section of code_
+- Think of context managers as something that helps in,
+  1. entering a context or a block of code
+  2. working within the context or a block of code
+  3. exiting the context or the block of code
+- Examples
+  - open/close file
+  - start db transaction/commit or abort transaction
+  - set decimal precision to 3/reset back to original
+- Context managers can be used for _enter/exit, start/stop_ or _set/reset_
+
+- Syntax
+
+  ```python
+  with context as obj_name:
+  	# do work
+
+  # after the "with" block context is cleaned up automatically
+  ```
+
+## The context management protocol
+
+Classes implement the context management protocol by implementing,
+
+- `__enter__` ⇒ setup and optionally return some object
+- `__exit__` ⇒ tear down / cleanup
+
+```python
+class MyClass:
+	def __init__(self):
+			# init class
+	def __enter__(self):
+			return obj
+	def __exit__(self):
+			# clean up object
+```
+
+Creating an object like,
+
+```python
+my_obj = MyClass()
+```
+
+would work as a regular class. `__enter__()` and `__exit__()` are not called. Works as a regular class.
+
+Instead call it like,
+
+```python
+with MyClass() as obj:
+	pass
+```
+
+This would do the following,
+
+- create an instance of MyClass → symbol not present but instance present
+- calls `my_instance.__enter__()`
+- return value from `__enter__` is assigned to `obj`
+- after the with block or if an exception occurs inside the with block
+  - `my_instance.__exit__` is called
+
+When we do something like,
+
+```python
+with context() as obj_name:
+	# do work
+
+# after the "with" block context is cleaned up automatically
+```
+
+The following kind of takes place,
+
+```python
+mgr = context()
+obj = mgr.__enter__()
+
+try:
+	# do something awesome
+finally:
+	# done with the context
+	mgr.__exit__()
+```
+
+## The `__enter__` method
+
+This method should perform whatever setup it needs to and can optionally return an object
+
+## The `__exit__` method
+
+Requires 3 arguments,
+
+- exception type
+- exception value
+- traceback object
+
+Returns `True` or `False`
+
+`True` ⇒ silence any raised exception
+
+`False` ⇒ do not silence a raised exception
+
+<aside>
+💡 `with` does not have it's own scope like function, closures or lists and uses the scope of where it's defined
+
+</aside>
+
+---
+
+## Context Managers and Generators
+
+```python
+class GeneratorContext:
+    def __init__(self, fn, *args, **kwargs):
+        self._gen = fn(*args, **kwargs)
+
+    def __enter__(self):
+        return next(self._gen)
+
+    def __exit__(self, type, value, tb):
+        try:
+            next(self._gen)
+        except StopIteration:
+            pass
+        return False
+```
+
+```python
+def my_gen():
+    try:
+        print("Creating a context and yielding an object")
+        global count
+        count +=1
+        yield [1, 2, 3]
+
+    finally:
+        print("Exiting the context and clearing up")
+```
+
+```python
+for _ in range(10):
+    with GeneratorContext(my_gen) as g:
+        print(g)
+```
+
+## Blueprint for creating context manager decorators
+
+```python
+@contextmanager
+def some_generator(<arguments>):
+    <setup>
+    try:
+        yield <value>
+    finally:
+        <cleanup>
+```
+
+Then use the context manager with the `with` statement
+
+```python
+with some_generator(<arguments>) as <variable>:
+    <body>
+```
+
+Which roughly translates to,
+
+```python
+<setup>
+try:
+    <variable> = <value>
+    <body>
+finally:
+    <cleanup>
+```
+
+---
+
+## Context managers as decorators and decorators as context managers
+
+Context managers can be used as decorator and decorators can be used as context managers.
+
+In the below example a runtime decorator is created to measure how long a function takes to run.
+
+1. Using context managers as decorators
+
+   - You need to inherit from the `contextlib.ContextDecorator` class
+
+   ```python
+   from contextlib import ContextDecorator
+   from time import time
+
+   class RunTime(ContextDecorator):
+       """Timing decorator."""
+
+       def __init__(self, description):
+           self.description = description
+
+       def __enter__(self):
+           print(self.description)
+           self.start_time = time()
+
+       def __exit__(self, *args):
+           self.end_time = time()
+           run_time = self.end_time - self.start_time
+           print(f"The function took {run_time} seconds to run.")
+
+   # Using the decorator like so,
+
+   @RunTime("This function opens a file")
+   def custom_file_write(filename, mode, content):
+       with open(filename, mode) as f:
+           f.write(content)
+   ```
+
+2. Using decorator as context managers
+
+- You just need to use the `contextlib.contextmanager` decorator
+
+  ```python
+  from contextlib import contextmanager
+
+  @contextmanager
+  def runtime(description):
+
+      print(description)
+      start_time = time()
+      try:
+          yield
+      finally:
+          end_time = time()
+          run_time = end_time - start_time
+          print(f"The function took {run_time} seconds to run.")
+  ```
+
+References -
+
+[The Curious Case of Python's Context Manager](https://rednafi.github.io/digressions/python/2020/03/26/python-contextmanager.html)
+
+<WebBookmark
+  href="https://rednafi.github.io/digressions/python/2020/03/26/python-contextmanager.html"
+  title="The Curious Case of Python's Context Manager"
+/>
