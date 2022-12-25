@@ -5,7 +5,7 @@ const ReadingProgress = () => {
   const readingProgress = useReadingProgress();
   return (
     <div
-      className="bg-slate-400 rounded-lg h-3 sticky top-0 "
+      className="bg-light-sea rounded-lg h-3 sticky top-0 "
       style={{ width: `${readingProgress}%` }}
     ></div>
   );
