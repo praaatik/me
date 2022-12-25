@@ -10,7 +10,7 @@ export interface Props {
 const BlockQuote = (props: any) => {
   const darkStyles: IBlockQuoteStyles = {
     containerStyles:
-      "bg-dark-marshmellow rounded-lg relative p-10 border-4 border-dark-mid",
+      "bg-dark-marshmellow rounded-lg relative p-10 border-4 border-dark-mid ",
   };
 
   const lightStyles: IBlockQuoteStyles = {
