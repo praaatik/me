@@ -1,0 +1,208 @@
+---
+title: Coroutines
+tags:
+  - react
+  - hooks
+  - javascript
+date: 2019-12-15
+excerpt: This is a blog relating to coroutines in Python.
+external: false
+url: ""
+---
+
+# Coroutines
+
+---
+
+## What on earth are they?
+
+- Cooperative routines, for long
+- A Python coroutine is essentially a _generator driven by calls to it's `.send(...)` method_. In a coroutine, the meaning of to yield is to give away the control to some other part of the program and wait until notified to resume.
+- _How is it notified to resume?_ - Well, when the caller invokes `my_coroutine.send(datum)` to push data in coroutine, the coroutine resumes the control and gets the _datum_ as the value of `yield` expression where it was suspended. That's until another `yield`of course.
+- Remember,
+  {" "}
+  <aside>💡 Generators **produce** data Coroutines **consume** data</aside>
+
+![3 types of coroutines in Python](Coroutines%2014294c3a13be4787bf042af56d8d3958/Untitled.png)
+
+3 types of coroutines in Python
+
+Look at the below to understand the meaning of a coroutine,
+
+> A classic coroutine is syntactically like a generator: just a function with the yield keyword in its body. However, in a coroutine, yield usually appears on the right-hand side of an expression (e.g., datum = yield), and it may or may not produce a value—if there is no expression after the yield keyword, the generator yields None. The coroutine may receive data from the caller, which uses coro.send(datum) instead of next(coro) to drive the coroutine. Usually, the caller pushes values into the coroutine. It is even possible that no data goes in or out through the yield keyword. When you start thinking of yield primarily in terms of control flow, you have the mindset to understand why coroutines are useful for concurrent programming.
+
+Taken from _Fluent Python_
+
+```python
+def another_simple_coro(a):
+    print('----> started: a = {}'.format(a))
+    b = yield a
+    print('----> recieved b = {}'.format(b))
+    c = yield a + b
+    print('----> recieved c: {}'.format(c))
+
+my_coro = another_simple_coro(42)    #'GEN_CREATED'
+
+next(my_coro)    #'GEN_SUSPENDED'
+"""
+----> started with the generator
+----> started: a = 42
+42
+"""
+
+next(my_coro)    #'GEN_SUSPENDED'
+"""
+----> recieved b = 1
+43
+"""
+
+next(my_coro)    #'GEN_SUSPENDED'
+"""
+----> recieved c: 1
+---------------------------------------------------------------------------
+StopIteration                             Traceback (most recent call last)
+<ipython-input-56-d3b0556285eb> in <module>
+----> 1 my_coro.send(1)
+
+StopIteration:
+"""
+```
+
+---
+
+## An interesting observation about generators!
+
+Look at the code below,
+
+```python
+def simple_generator():
+    for _ in range(10):
+        print("yet to yield")
+        yield
+        print("yield done!")
+```
+
+The control execution stops exactly at the `yield`statement, anything after that is not executed until the next time the control resumes.
+
+```python
+s = simple_generator()
+
+next(s)
+"""
+yet to yield
+"""
+```
+
+```python
+next(s)
+"""
+yield done!
+yet to yield
+"""
+```
+
+This might be pretty trivial future me, but I found it interesting. So stop eye rolling.
+
+---
+
+## Priming a generator
+
+Just look at the code below,
+
+```python
+def test_gen():
+    while True:
+        print("priming step")
+        recieved = yield 'Python'
+        print("so the value currently is: {}".format(recieved))
+```
+
+When we first create the generator like so,
+
+```python
+gen = test_gen()
+```
+
+the generator is **CREATED** not stated with the execution yet. So we need to **prime** the generator by calling `next()`first so the generator goes in **SUSPENDED** mode after **RUNNING**.
+
+I have wrote a simple decorator for now, let's see if it's something similar to what Fred creates sometime later in the course... (Added later: Yes, that's how it's done :) )
+
+```python
+def primer(fn):
+    def inner(*args, **kwargs):
+        result = fn(*args, **kwargs)
+        next(result)
+        return result
+    return inner
+
+@primer
+def test_gen():
+    while True:
+        print("priming")
+        recieved = yield 'Python'
+        print("so the value currently is: {}".format(recieved))
+
+g = test_gen()    # priming
+```
+
+---
+
+## Coroutine Termination
+
+- We can close the coroutine by using the _`generator.close()`_ method.
+- This causes the `yield` to raise a _GeneratorExit_ exception.
+
+---
+
+## Sending things to coroutines
+
+- `.send(data)` ⇒ send data to coroutine
+- `.close()` ⇒ send (throws) a `GeneratorExit` exception to coroutine
+- `.throw(Exception)` ⇒ send an exception to the coroutine
+
+---
+
+## Two way communications (yield from)
+
+```python
+def subgen():
+    for i in range(3):
+        yield i
+
+def delegator():
+    yield from subgen()
+    yield 'Subgen closed'
+```
+
+### `yield from` and `send()`
+
+Control flow is similar to the one above,
+
+caller next → delegator next → subgen
+
+subgen yields → delegators yields → caller
+
+<aside>
+💡 There can be *piplines* having multiple delegators in between
+
+</aside>
+
+```python
+def coro():
+		"""
+		This is the subgenerator
+		"""
+    data = None
+    while True:
+        data = yield
+        if not data:
+            print("I'm done!")
+        else:
+            print("Data is {0}, mirror is {1}".format(data, data[::-1]))
+
+@coroutine_decorator
+def delegator():
+    yield from coro()
+
+d.send("one")    # Data is one, mirror is eno
+```
