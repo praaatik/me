@@ -91,7 +91,7 @@ export default function Posts({ posts }: { posts: PostMetadata[] }) {
             >
               <li
                 key={post.slug}
-                className="border-light-sea border-2 p-2 rounded cursor-pointer"
+                className="border-light-sea border-2 p-2 w-full rounded cursor-pointer"
               >
                 <div
                   className={
