@@ -38,6 +38,9 @@ module.exports = {
           mid: "hsl(0, 0%, 80%)",
         },
       },
+      fontFamily: {
+        "noto-serif": ["Noto Serif", "serif"],
+      },
     },
   },
   plugins: [],

@@ -19,7 +19,7 @@ export default function Posts({ posts }: { posts: PostMetadata[] }) {
 
   const darkStyles: IPostStyles = {
     tagsMetadataStyles:
-      "cursor-pointer bg-dark-marshmellow border-dark-mid border-2 text-light-background-1 p-2 m-2 text-sm rounded-lg hover:underline",
+      "cursor-pointer bg-dark-marshmellow border-dark-mid border-2 text-light-background-1 p-2 m-2 text-sm rounded-lg hover:underline ",
     tagsStyles:
       "p-2 m-2 text-xs rounded-lg lg:text-sm hover:underline bg-dark-marshmellow border-dark-mid border-2 text-light-background-1",
     tagsHeaderStyles: "text-2xl p-4 px-0 text-left text-light-background-1",
@@ -32,9 +32,9 @@ export default function Posts({ posts }: { posts: PostMetadata[] }) {
 
   const lightStyles: IPostStyles = {
     tagsMetadataStyles:
-      "cursor-pointer bg-light-peach border-light-rose border-2 text-dark-background-1 p-2 m-2 text-sm rounded-lg hover:underline",
+      "cursor-pointer bg-light-peach border-light-rose border-2 text-dark-background-1 p-2 m-2 text-sm rounded-lg hover:underline ",
     tagsStyles:
-      "p-2 m-2 text-xs rounded-lg lg:text-sm hover:underline bg-light-peach border-light-rose border-2",
+      "p-2 m-2 text-xs rounded-lg lg:text-sm hover:underline bg-light-peach border-light-rose border-2 w-fit",
     tagsHeaderStyles: "text-2xl p-4 px-0 text-left text-dark-background-1",
     postsHeaderStyles: "text-3xl p-4 px-0 text-dark-background-1",
     postsTitleStyles:
@@ -44,8 +44,8 @@ export default function Posts({ posts }: { posts: PostMetadata[] }) {
   };
 
   return (
-    <div className="my-2 flex justify-evenly flex-row-reverse ">
-      <div className="tags hidden md:inline md:text-center">
+    <div className="my-2 mx-2 flex justify-evenly flex-row-reverse ">
+      <div className="tags hidden md:inline md:text-center ">
         <h2
           className={
             context?.isThemeDark
@@ -72,7 +72,7 @@ export default function Posts({ posts }: { posts: PostMetadata[] }) {
           ))}
         </ul>
       </div>
-      <div className="posts">
+      <div className="posts ">
         <h1
           className={
             context?.isThemeDark
@@ -114,7 +114,7 @@ export default function Posts({ posts }: { posts: PostMetadata[] }) {
                 >
                   {post.excerpt}
                 </p>
-                <p className="flex">
+                <div className="grid grid-cols-3 md:flex">
                   {post.tags.map((tag) => (
                     <div
                       key={tag}
@@ -127,7 +127,7 @@ export default function Posts({ posts }: { posts: PostMetadata[] }) {
                       <Link href={`/tags/${tag}`}>{tag}</Link>
                     </div>
                   ))}
-                </p>
+                </div>
               </li>
             </CustomLink>
           ))}

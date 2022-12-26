@@ -4,6 +4,8 @@ import React, { useContext } from "react";
 import { useState } from "react";
 import { FiMoon, FiSun } from "react-icons/fi";
 import INavbarStyles from "../interfaces/INavbarStyles";
+import PratikKulkarniBlack from "../../styles/images/pratik_kulkarni_black.svg";
+import Image from "next/image";
 
 const Navbar = () => {
   const links = [
@@ -20,6 +22,17 @@ const Navbar = () => {
       to: "/blog",
     },
   ];
+  const myloader = ({
+    src,
+    width,
+    height,
+  }: {
+    src: string;
+    width: number;
+    height: number;
+  }) => {
+    return ``;
+  };
   const context = useContext(ThemeContext);
 
   const changeTheme = () => {

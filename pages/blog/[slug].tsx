@@ -30,14 +30,14 @@ export default function PostPage({ post }: { post: MDXPost }) {
       "text-4xl p-4 text-center md:font-extrabold lg:text-6xl lg:p-10 bg-light-background-1",
     excerptStyle:
       "text-sm p-4 text-center italic lg:text-base after:content-[''] after:w-1/4 after:h-1 after:bg-light-rose after:block after:m-auto after:mt-8 after:mb-10 bg-light-background-1",
-    containerStyle: "text-dark-background-3",
+    containerStyle: "text-dark-background-3 ",
   };
   const darkStyles: IPostPageStyles = {
     titleStyle:
       "text-4xl p-4 text-center lg:text-6xl md:font-extrabold lg:p-10 bg-dark-background-3",
     excerptStyle:
       "text-sm p-4 text-center italic lg:text-base after:content-[''] after:w-1/4 after:h-1 after:bg-dark-marshmellow after:block after:m-auto after:mt-8 after:mb-10 bg-dark-background-3",
-    containerStyle: "text-light-background-3 bg-dark-background-3",
+    containerStyle: "text-light-background-3 bg-dark-background-3 ",
   };
 
   return (

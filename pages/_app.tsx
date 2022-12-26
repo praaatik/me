@@ -40,7 +40,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           isThemeDark ? "bg-dark-background-3" : "bg-light-background-1"
         }
       >
-        <div className="container lg:px-52 px-8">
+        <div className="container lg:px-52 ">
           <Head>
             <title>Pratik Kulkarni</title>
           </Head>
