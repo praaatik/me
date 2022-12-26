@@ -3,6 +3,8 @@ import Head from "next/head";
 import { getAllPosts } from "@/src/api";
 import Posts from "@/src/components/Posts";
 import { PostMetadata } from "@/src/interfaces/PostMetadata";
+import { useContext } from "react";
+import { ThemeContext } from "pages/_app";
 
 export default function TagPage({
   slug,
@@ -11,16 +13,32 @@ export default function TagPage({
   slug: string;
   posts: PostMetadata[];
 }) {
+  const context = useContext(ThemeContext);
   return (
-    <>
+    <div className="h-screen">
       <Head>
         <title>Tag: {slug}</title>
       </Head>
-      <h1 className="text-center p-4 text-sm">
-        Listing by tag: <div className="italic">{slug}</div>
+      <h1
+        className={
+          context?.isThemeDark
+            ? "text-center p-4 text-sm text-light-background-1"
+            : "text-center p-4 text-sm text-dark-background-1"
+        }
+      >
+        Listing by tag:{" "}
+        <div
+          className={
+            context?.isThemeDark
+              ? "italic p-2 m-auto mt-2 w-fit text-xs rounded-lg lg:text-sm cursor-default bg-dark-marshmellow border-dark-mid border-2 text-light-background-1"
+              : "italic p-2 m-auto mt-2 w-fit text-xs rounded-lg lg:text-sm  cursor-default bg-light-peach border-light-rose border-2 text-dark-background-1"
+          }
+        >
+          {slug}
+        </div>
       </h1>
       <Posts posts={posts} />
-    </>
+    </div>
   );
 }
 

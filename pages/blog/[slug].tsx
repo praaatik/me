@@ -70,7 +70,6 @@ export default function PostPage({ post }: { post: MDXPost }) {
       >
         {post?.metadata?.excerpt}
       </div>
-      {/* <div className="flex justify-center m-3 mb-0"></div> */}
       <div className="flex flex-row-reverse justify-center lg:justify-around">
         <div className="lg:sticky lg:top-0 lg:h-fit lg:inline hidden ">
           <TableOfContents contents={post?.headings} />
