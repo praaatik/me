@@ -15,7 +15,7 @@ export default function TagPage({
 }) {
   const context = useContext(ThemeContext);
   return (
-    <div className="h-screen">
+    <div className="h-full">
       <Head>
         <title>Tag: {slug}</title>
       </Head>
