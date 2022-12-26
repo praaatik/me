@@ -59,10 +59,7 @@ export const getHeadings = async (post: string, metadata: PostMetadata) => {
   return headingLines.map((raw) => {
     const heading = raw.replace(/^###*\s/, "");
     const level = raw.slice(0, 3) === "###" ? 3 : 2;
-    let url = `${metadata?.slug}/#${heading
-      .toLowerCase()
-      .split(" ")
-      .join("-")}`;
+    let url = `${metadata?.slug}#${heading.toLowerCase().split(" ").join("-")}`;
 
     if (url.includes(".")) {
       console.log(url);
