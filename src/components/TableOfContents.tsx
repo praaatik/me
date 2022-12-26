@@ -11,10 +11,14 @@ const TableOfContents = ({ contents }: ITableOfContentArray) => {
   const lightStyles: ITOCPageStyles = {
     headingStyles:
       " lg:text-xl lg:text-center border-light-rose border-b-2 py-2",
+    indentationStyles:
+      "before:content-[''] before:block before:h-10 before:w-[1px] before:bg-light-rose before:left-5 before:absolute before:overflow-hidden",
   };
   const darkStyles: ITOCPageStyles = {
     headingStyles:
       " lg:text-xl lg:text-center border-dark-peach border-b-2 py-2",
+    indentationStyles:
+      "before:content-[''] before:block before:h-10 before:w-[1px] before:bg-dark-peach before:left-5 before:absolute before:overflow-hidden",
   };
 
   return (
@@ -44,7 +48,9 @@ const TableOfContents = ({ contents }: ITableOfContentArray) => {
                   key={content?.url}
                   className={
                     content?.level === 3
-                      ? "before:content-[''] before:block before:h-10 before:w-[1px] before:bg-slate-600 before:left-5 before:absolute before:overflow-hidden"
+                      ? context?.isThemeDark
+                        ? darkStyles.indentationStyles
+                        : lightStyles.indentationStyles
                       : ""
                   }
                 >

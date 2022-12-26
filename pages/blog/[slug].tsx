@@ -85,6 +85,15 @@ export default function PostPage({ post }: { post: MDXPost }) {
               h1: (props: any) => <H1 {...props} />,
               h2: (props: any) => <H2 {...props} />,
               h3: (props: any) => <H3 {...props} />,
+              hr: () => (
+                <hr
+                  className={
+                    context?.isThemeDark
+                      ? "border-dark-peach"
+                      : "border-light-rose"
+                  }
+                />
+              ),
               p: (props: any) => <p {...props} className="mb-4" />,
               blockquote: (props: any) => (
                 <BlockQuote
