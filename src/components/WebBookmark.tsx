@@ -1,28 +1,32 @@
-import { GetStaticProps } from "next";
-import { useEffect, useState } from "react";
-import Image, { ImageLoader } from "next/image";
-import Link from "next/link";
+import { ThemeContext } from "pages/_app";
+import { useContext, useEffect, useState } from "react";
+import IPreview from "../interfaces/IPreview";
+import IPreviewResponseStatus from "../interfaces/IPreviewResponseStatus";
+import IWebBookmarkStyles from "../interfaces/IWebBookmarkStyles";
 
 interface Props {
   href: string;
   title: string;
 }
 
-interface IPreview {
-  title?: string;
-  url?: string;
-  image: string;
-  description?: string;
-}
+const lightStyles: IWebBookmarkStyles = {
+  containerStyles:
+    "border-2 border-light-rose p-4 flex row justify-evenly lg:mr-24 lg:my-8 lg:ml-0 cursor-pointer hover:underline",
+  descriptionStyles: "text-xs text-dark-background-3 mt-1 lg:text-sm",
+  titleStyles: "text-base text-dark-background-1 lg:text-xl",
+};
 
-interface ResponseStatus {
-  isError?: boolean;
-  isLoading?: boolean;
-}
+const darkStyles: IWebBookmarkStyles = {
+  containerStyles:
+    "border-2 border-dark-peach p-4 flex row justify-evenly lg:mr-24 lg:my-8 lg:ml-0 cursor-pointer hover:underline",
+  descriptionStyles: "text-xs text-light-background-3 mt-1 lg:text-sm",
+  titleStyles: "text-base text-light-background-1 lg:text-xl",
+};
 
 const WebBookmark = ({ href }: Props) => {
+  const context = useContext(ThemeContext);
   const [preview, previewSet] = useState<IPreview>();
-  const [response, responseSet] = useState<ResponseStatus>({
+  const [response, responseSet] = useState<IPreviewResponseStatus>({
     isError: false,
     isLoading: false,
   });
@@ -44,28 +48,39 @@ const WebBookmark = ({ href }: Props) => {
       })
       .then((response) => {
         previewSet(response);
-        console.log(response);
         responseSet({ isError: false, isLoading: false });
       })
       .catch((error) => {
-        console.log("error happened man!");
-        console.log(error);
         responseSet({ isError: true, isLoading: false });
       });
   }, []);
 
-  useEffect(() => {}, [preview]);
-
-  useEffect(() => {
-    console.log(response?.isError);
-  }, [response?.isError]);
-
   return (
     <a href={href} target={"_blank"} rel="noreferrer">
-      <div className="border-2 border-black p-4 flex row justify-evenly lg:mr-24 lg:my-8 lg:ml-0 cursor-pointer hover:underline">
+      <div
+        className={
+          context?.isThemeDark
+            ? darkStyles.containerStyles
+            : lightStyles.containerStyles
+        }
+      >
         <div className="flex flex-col justify-evenly lg:justify-around">
-          <div className="text-base lg:text-xl">{preview?.title}</div>
-          <div className="text-xs text-slate-700 mt-1 lg:text-sm">
+          <div
+            className={
+              context?.isThemeDark
+                ? darkStyles.titleStyles
+                : lightStyles.titleStyles
+            }
+          >
+            {preview?.title}
+          </div>
+          <div
+            className={
+              context?.isThemeDark
+                ? darkStyles.descriptionStyles
+                : lightStyles.descriptionStyles
+            }
+          >
             {preview?.description}
           </div>
         </div>
