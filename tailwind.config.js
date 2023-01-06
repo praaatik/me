@@ -31,6 +31,7 @@ module.exports = {
           biscuit: "hsl(26, 18%, 61%)",
           oat: "hsl(17, 12%, 77%)",
           rose: "hsl(344, 56%, 69%)",
+          rose_lighter: "hsl(344, 56%, 80%)",
           sea: "hsl(189, 58%, 65%)",
           "background-1": "hsl(210, 4%, 98%)",
           "background-2": "hsl(210, 4%, 96%)",

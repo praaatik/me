@@ -39,7 +39,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         className={
           isThemeDark
             ? "bg-dark-background-3 h-screen overflow-auto selection:bg-dark-mint-selection selection:text-light-background-1"
-            : "bg-light-background-1 h-screen overflow-auto selection:bg-light-rose selection:text-dark-background-1"
+            : "bg-light-background-1 h-screen overflow-auto selection:bg-light-rose_lighter selection:text-dark-background-1"
         }
       >
         <div className="container lg:px-52 ">

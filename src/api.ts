@@ -85,6 +85,10 @@ export const getHeadings = async (post: string, metadata: PostMetadata) => {
       url = url.split("?").join("");
     }
 
+    if (url.includes("__")) {
+      // url = url.split("__").join("__");
+    }
+
     if (url.includes("_")) {
       url = url.split("_").join("");
     }
