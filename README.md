@@ -1,1 +1,1 @@
-# Nextjs Blog
+# My blog

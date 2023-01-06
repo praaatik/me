@@ -1,6 +1,6 @@
-import Image from "next/image";
 import { ThemeContext } from "pages/_app";
 import { useContext } from "react";
+import { AiFillGithub, AiFillMail } from "react-icons/ai";
 
 export default function About() {
   const context = useContext(ThemeContext);
@@ -72,6 +72,14 @@ export default function About() {
             alt="profile"
           />
         </div>
+      </div>
+      <div className=" w-full h-20 flex justify-evenly items-center lg:w-1/3 lg:justify-start lg:gap-10">
+        <a href="https://github.com/praaatik" target="_blank" rel="noreferrer">
+          <AiFillGithub size={40} />
+        </a>
+        <a href="mailto:praaatik.kulkarni@proton.me">
+          <AiFillMail size={40} />
+        </a>
       </div>
     </div>
   );
