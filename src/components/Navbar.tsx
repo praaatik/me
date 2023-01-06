@@ -101,8 +101,8 @@ const Navbar = () => {
                   <img
                     src={
                       context?.isThemeDark
-                        ? "/images/darkThemeLogo.svg"
-                        : "/images/lightThemeLogo.svg"
+                        ? "https://raw.githubusercontent.com/praaatik/me/main/public/images/darkThemeLogo.svg"
+                        : "https://raw.githubusercontent.com/praaatik/me/main/public/images/lightThemeLogo.svg"
                     }
                     alt="Dark Theme Logo"
                     className="w-60 h-60"
