@@ -96,20 +96,19 @@ const Navbar = () => {
               </button>
             </div>
             <div className=" flex w-full justify-around items-end sm:items-center sm:justify-between">
-              <div className="">
-                {/* <h1>Pratik Kulkarni</h1> */}
-                <img
-                  src={
-                    context?.isThemeDark
-                      ? "/images/darkThemeLogo.svg"
-                      : "/images/lightThemeLogo.svg"
-                  }
-                  alt="Dark Theme Logo"
-                  // width="300px"
-                  // height="300px"
-                  className="w-60 h-w-60"
-                />
-              </div>
+              <Link href="/" passHref>
+                <div className="hover:cursor-pointer">
+                  <img
+                    src={
+                      context?.isThemeDark
+                        ? "/images/darkThemeLogo.svg"
+                        : "/images/lightThemeLogo.svg"
+                    }
+                    alt="Dark Theme Logo"
+                    className="w-60 h-60"
+                  />
+                </div>
+              </Link>
 
               <div className="hidden sm:flex sm:justify-evenly sm:ml-6">
                 <div className="flex space-x-12">
