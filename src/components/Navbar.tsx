@@ -95,9 +95,20 @@ const Navbar = () => {
                 </svg>
               </button>
             </div>
-            <div className=" flex w-full justify-around items-end sm:items-stretch sm:justify-around ">
-              <div className="flex-shrink-0 flex items-center">
-                <h1>Pratik Kulkarni</h1>
+            <div className=" flex w-full justify-around items-end sm:items-center sm:justify-between">
+              <div className="">
+                {/* <h1>Pratik Kulkarni</h1> */}
+                <img
+                  src={
+                    context?.isThemeDark
+                      ? "/images/darkThemeLogo.svg"
+                      : "/images/lightThemeLogo.svg"
+                  }
+                  alt="Dark Theme Logo"
+                  // width="300px"
+                  // height="300px"
+                  className="w-60 h-w-60"
+                />
               </div>
 
               <div className="hidden sm:flex sm:justify-evenly sm:ml-6">

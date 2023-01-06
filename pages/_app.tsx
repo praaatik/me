@@ -4,6 +4,7 @@ import Head from "next/head";
 import "@/styles/globals.css";
 import React, { useEffect, useState } from "react";
 import Navbar from "../src/components/Navbar";
+import ScrollToTop from "@/src/components/ScrollToTop";
 
 interface IThemeContext {
   isThemeDark: boolean;
@@ -42,7 +43,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             : "bg-light-background-1 h-screen overflow-auto selection:bg-light-rose_lighter selection:text-dark-background-1"
         }
       >
-        <div className="container lg:px-52 ">
+        <div className="container lg:px-52">
           <Head>
             <title>Pratik Kulkarni</title>
             <link

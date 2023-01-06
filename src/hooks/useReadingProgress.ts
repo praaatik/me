@@ -17,5 +17,7 @@ export function useReadingProgress() {
     window.addEventListener("scroll", updateScrollCompletion);
   }, []);
 
+  console.log(readingProgress);
+
   return readingProgress;
 }

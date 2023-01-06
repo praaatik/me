@@ -48,7 +48,7 @@ export default function PostPage({ post }: { post: MDXPost }) {
           : lightStyles.containerStyle
       }
     >
-      <ReadingProgress />
+      {/* <ReadingProgress /> */}
       <Head>
         <title>{post?.metadata?.title}</title>
       </Head>
@@ -118,8 +118,8 @@ export default function PostPage({ post }: { post: MDXPost }) {
 
       <div className="flex justify-center">
         <div className="w-1/4 h-1 bg-black mt-8 mb-8"></div>
+        <ScrollToTop />
       </div>
-      <ScrollToTop />
     </div>
   );
 }
