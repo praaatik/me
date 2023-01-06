@@ -68,6 +68,7 @@ export default function About() {
         </div>
         <div className="profile-image h-1/2 w-1/2 sm:h-full sm:w-full lg:m-0 m-auto mb-5 justify-center flex">
           <img
+            // src="https://raw.githubusercontent.com/praaatik/me/main/public/images/profile_blob_2.png"
             src="/images/profile_blob_2.png"
             alt="profile"
             // className="h-full w-full"

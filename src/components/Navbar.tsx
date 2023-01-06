@@ -10,29 +10,15 @@ import Image from "next/image";
 const Navbar = () => {
   const links = [
     {
-      name: "home",
+      name: "/home",
       to: "/",
     },
     {
-      name: "about",
+      name: "/about",
       to: "/about",
     },
-    {
-      name: "blog",
-      to: "/blog",
-    },
   ];
-  const myloader = ({
-    src,
-    width,
-    height,
-  }: {
-    src: string;
-    width: number;
-    height: number;
-  }) => {
-    return ``;
-  };
+
   const context = useContext(ThemeContext);
 
   const changeTheme = () => {
