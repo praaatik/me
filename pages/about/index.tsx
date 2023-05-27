@@ -1,9 +1,11 @@
+import Project from "@/src/components/Project";
 import { ThemeContext } from "pages/_app";
 import { useContext } from "react";
 import { AiFillGithub, AiFillMail } from "react-icons/ai";
 
 export default function About() {
   const context = useContext(ThemeContext);
+  const projects = [{ title: "one", subtitle: "one subtitle" }, { title: "one", subtitle: "one subtitle" }]
 
   return (
     <div
@@ -73,6 +75,8 @@ export default function About() {
           />
         </div>
       </div>
+      {/* <Project projects={projects} /> */}
+
       <div className=" w-full h-20 flex justify-evenly items-center lg:w-1/3 lg:justify-start lg:gap-10">
         <a href="https://github.com/praaatik" target="_blank" rel="noreferrer">
           <AiFillGithub size={40} />
@@ -81,6 +85,7 @@ export default function About() {
           <AiFillMail size={40} />
         </a>
       </div>
+
     </div>
   );
 }

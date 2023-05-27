@@ -10,12 +10,12 @@ export interface Props {
 const BlockQuote = (props: any) => {
   const darkStyles: IBlockQuoteStyles = {
     containerStyles:
-      "bg-dark-marshmellow rounded-lg relative p-10 border-4 border-dark-mid ",
+      "bg-dark-marshmellow rounded-lg relative p-10 border-4 border-dark-mid my-5 ",
   };
 
   const lightStyles: IBlockQuoteStyles = {
     containerStyles:
-      "bg-light-peach rounded-lg relative p-10 border-4 border-light-rose",
+      "bg-light-peach rounded-lg relative p-10 border-4 border-light-rose my-5",
   };
 
   const context = useContext(ThemeContext);

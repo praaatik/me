@@ -17,6 +17,10 @@ const Navbar = () => {
       name: "/about",
       to: "/about",
     },
+    {
+      name: "/projects",
+      to: "/projects"
+    }
   ];
 
   const context = useContext(ThemeContext);
@@ -32,7 +36,7 @@ const Navbar = () => {
     buttonStyles:
       "inline-flex items-center justify-center p-2 rounded-md text-light-sea hover:text-light-background-3 hover:bg-dark-background-2 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-light-background-1",
     mobileMenuStyles:
-      "text-light-background-2 hover:bg-light-background-1 hover:text-dark-background-1 block px-3 py-2 rounded-md text-base font-medium",
+      "text-light-background-2 hover:bg-light-background-1 hover:text-dark-background-1 block px-3 py-3 rounded-md text-base font-medium border-black border",
     mobileThemeIcon: "w-fit mx-auto text-light-background-3",
   };
 
@@ -42,7 +46,7 @@ const Navbar = () => {
     buttonStyles:
       "inline-flex items-center justify-center p-2 rounded-md text-light-sea hover:text-light-background-3 hover:bg-dark-background-2 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-light-background-1",
     mobileMenuStyles:
-      "text-black-300 hover:bg-dark-background-1 hover:text-light-background-1 block px-3 py-2 rounded-md text-base font-medium",
+      "text-black-300 hover:bg-dark-background-1 hover:text-light-background-1 block px-3 py-3 rounded-md text-base font-medium border-black border",
     mobileThemeIcon: "w-fit mx-auto text-dark-background-3",
   };
 
@@ -149,7 +153,7 @@ const Navbar = () => {
                       ? darkStyles.mobileMenuStyles
                       : lightStyles.mobileMenuStyles
                   }
-                  key={link?.name}
+                  key={link?.to}
                 >
                   {link.name}
                 </a>

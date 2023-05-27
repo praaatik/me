@@ -8,7 +8,7 @@ const Callout = (props: any) => {
   return (
     <>
       <p
-        className="bg-slate-300 p-4 text-black after:content-lightbulb after:block after:w-4 after:h-4"
+        className="bg-slate-300 py-5 text-black after:content-lightbulb after:block after:w-4 after:h-4"
         {...props}
       ></p>
     </>

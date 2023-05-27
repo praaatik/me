@@ -7,7 +7,7 @@ import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeHighlight from "rehype-highlight";
 import "highlight.js/styles/atom-one-dark.css";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { getHeadings, getPostFromSlug, getSlugs } from "../../src/api";
 import H1 from "../../src/components/H1";
 import H2 from "@/src/components/H2";
@@ -24,6 +24,10 @@ import MDXPost from "@/src/interfaces/MDXPost";
 
 export default function PostPage({ post }: { post: MDXPost }) {
   const context = useContext(ThemeContext);
+
+  useEffect(() => {
+    console.log(post.metadata)
+  }, [])
 
   const lightStyles: IPostPageStyles = {
     titleStyle:
@@ -71,9 +75,10 @@ export default function PostPage({ post }: { post: MDXPost }) {
         {post?.metadata?.excerpt}
       </div>
       <div className="flex flex-row-reverse justify-center lg:justify-around">
-        <div className="lg:sticky lg:top-0 lg:h-fit lg:inline hidden ">
+        {!post.metadata.project && <div className="lg:sticky lg:top-0 lg:h-fit lg:inline hidden ">
           <TableOfContents contents={post?.headings} />
-        </div>
+        </div>}
+
         <div className="lg:w-2/3 w-4/5 mx-0">
           <MDXRemote
             {...post.source}
@@ -97,7 +102,7 @@ export default function PostPage({ post }: { post: MDXPost }) {
               blockquote: (props: any) => (
                 <BlockQuote
                   {...props}
-                  // className="bg-dark-marshmellow p-5 rounded-lg my-4 after:w-full after:h-full after:block after:m-auto"
+                // className="bg-dark-marshmellow p-5 rounded-lg my-4 after:w-full after:h-full after:block after:m-auto"
                 />
               ),
               li: (props: any) => (

@@ -1,0 +1,26 @@
+# Photogram
+
+## Technologies Used
+
+- React
+- JavaScript
+- Firestore (for data storage)
+
+## Description
+
+Photogram is a simple web application that allows users to store and search for photos by tags. The app works well, considering it was developed when I was learning to code using React, and it allowed me to tinker with Firebase for the backend and authentication.
+
+## What's cool about it?
+
+- Simple and easy-to-use web app
+- Great opportunity to learn and work with React, Firebase, and Firestore technologies
+- Provides basic functionality for photo storage and search
+
+## What could be better?
+
+A lot of things, actually,
+
+- UI could be improved to make it more intuitive and user-friendly
+- Limited functionality, as it only supports essential photo storage and retrieval
+- No method of bulk uploads
+- No tests are present

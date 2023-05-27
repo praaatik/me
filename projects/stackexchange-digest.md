@@ -1,0 +1,19 @@
+# Stack Exchange Digest
+
+## What is it?
+
+Stack Exchange Digest is a small personal project that fetches the most recent questions from various Stack Exchange websites.
+
+## Why did I create this project?
+
+I found reading questions on Stack Exchange sites fun and exciting, but I couldn't find a place to get all the questions from the sites I followed in one place. So, I decided to create this project.
+
+Additionally, I created this project to practice my recently learned ReactJS skills.
+
+## What's cool about it?
+
+Despite being a basic project with limited customization, I use it regularly. The project provides a centralized location for users to view recent questions from multiple Stack Exchange sites.
+
+## What could be better?
+
+As this is a small personal project, the scope is limited.

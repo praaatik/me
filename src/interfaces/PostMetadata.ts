@@ -6,4 +6,5 @@ export interface PostMetadata {
   date: string;
   external?: boolean;
   url?: string;
+  project?: boolean;
 }

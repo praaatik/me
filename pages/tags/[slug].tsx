@@ -1,6 +1,6 @@
 import type { GetStaticProps, GetStaticPaths } from "next";
 import Head from "next/head";
-import { getAllPosts } from "@/src/api";
+import { getAllPosts, getAllTags } from "@/src/api";
 import Posts from "@/src/components/Posts";
 import { PostMetadata } from "@/src/interfaces/PostMetadata";
 import { useContext } from "react";
@@ -9,9 +9,11 @@ import { ThemeContext } from "pages/_app";
 export default function TagPage({
   slug,
   posts,
+  tagsArray
 }: {
   slug: string;
   posts: PostMetadata[];
+  tagsArray: String[]
 }) {
   const context = useContext(ThemeContext);
   return (
@@ -37,7 +39,7 @@ export default function TagPage({
           {slug}
         </div>
       </h1>
-      <Posts posts={posts} />
+      <Posts posts={posts} tagsArray={tagsArray} />
     </div>
   );
 }
@@ -48,10 +50,13 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     post.metadata.tags.includes(slug)
   );
 
+  const tagsArray = [...getAllTags()];
+
   return {
     props: {
       slug,
       posts: posts.map((post) => post.metadata),
+      tagsArray,
     },
   };
 };

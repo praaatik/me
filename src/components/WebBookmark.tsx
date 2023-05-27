@@ -88,7 +88,7 @@ const WebBookmark = ({ href }: Props) => {
           <img
             src={preview?.image}
             alt={`Image for ${preview?.title}`}
-            className="border-black border-2 h-2/3 w-2/3"
+            className="h-2/3 w-2/3"
           />
         )}
       </div>

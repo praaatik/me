@@ -32,6 +32,18 @@ export const getAllPosts = () => {
   return posts;
 };
 
+export const getAllTags = () => {
+  const posts = getAllPosts();
+  const tags: Set<string> = new Set();
+
+  posts.map((post) => {
+    post.metadata.tags.forEach((tag) => {
+      tags.add(tag);
+    });
+  });
+  return tags;
+};
+
 export const getPostFromSlug = (slug: string): Post => {
   const postPath = path.join(POSTS_PATH, `${slug}.mdx`);
   const source = fs.readFileSync(postPath);
@@ -47,6 +59,7 @@ export const getPostFromSlug = (slug: string): Post => {
       date: (data.date ?? new Date()).toString(),
       external: data?.external,
       url: data?.url,
+      project: data?.project,
     },
   };
 };

@@ -5,6 +5,7 @@ import "@/styles/globals.css";
 import React, { useEffect, useState } from "react";
 import Navbar from "../src/components/Navbar";
 import ScrollToTop from "@/src/components/ScrollToTop";
+import Project from "@/src/components/Project";
 
 interface IThemeContext {
   isThemeDark: boolean;
@@ -127,8 +128,8 @@ function MyApp({ Component, pageProps }: AppProps) {
               href="https://raw.githubusercontent.com/praaatik/me/main/public/favicons/favicon-180.png"
             />
           </Head>
-
           <Navbar />
+          <ScrollToTop />
           <Component {...pageProps} />
         </div>
       </div>

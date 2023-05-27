@@ -36,12 +36,11 @@ const ScrollToTop = () => {
       }
     >
       {showButton && (
-        // <FaAngleUp
-        //   size={40}
-        //   className="border-2 border-light-sea cursor-pointer"
-        //   onClick={() => scrollUp()}
-        // />
-        <div>This is the scroll to top button </div>
+        <FaAngleUp
+          size={40}
+          className="border-2 border-light-sea cursor-pointer"
+          onClick={() => scrollUp()}
+        />
       )}
     </div>
   );

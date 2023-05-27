@@ -1,10 +1,10 @@
-import { getAllPosts } from "@/src/api";
+import { getAllPosts, getAllTags } from "@/src/api";
 import Posts from "@/src/components/Posts";
 import { PostMetadata } from "@/src/interfaces/PostMetadata";
 import { ThemeContext } from "pages/_app";
 import React, { useContext, useState } from "react";
 
-export default function Blog({ posts }: { posts: PostMetadata[] }) {
+export default function Blog({ posts, tagsArray }: { posts: PostMetadata[], tagsArray: String[] }) {
   const [currentIndex, currentIndexSet] = useState(0);
   const context = useContext(ThemeContext);
 
@@ -31,7 +31,7 @@ export default function Blog({ posts }: { posts: PostMetadata[] }) {
 
   return (
     <>
-      <Posts posts={posts.slice(0, currentIndex + 9)} />
+      <Posts posts={posts.slice(0, currentIndex + 9)} tagsArray={tagsArray} />
       <div className="flex justify-center">
         <button
           onClick={() => currentIndexSet(currentIndex + 10)}
@@ -41,8 +41,8 @@ export default function Blog({ posts }: { posts: PostMetadata[] }) {
                 ? darkStyles?.nowAllowedStyles
                 : darkStyles?.allowedStyles
               : currentIndex > posts?.length
-              ? lightStyles?.nowAllowedStyles
-              : lightStyles?.allowedStyles
+                ? lightStyles?.nowAllowedStyles
+                : lightStyles?.allowedStyles
           }
         >
           Load more posts
@@ -54,6 +54,7 @@ export default function Blog({ posts }: { posts: PostMetadata[] }) {
 
 export async function getStaticProps() {
   const posts = getAllPosts().map((post) => post.metadata);
+  const tagsArray = [...getAllTags()];
 
-  return { props: { posts } };
+  return { props: { posts, tagsArray } };
 }
