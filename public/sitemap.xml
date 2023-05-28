@@ -1,26 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
-<url><loc>https://www.capsules.com</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2023-01-06T11:46:05.207Z</lastmod></url>
-<url><loc>https://www.capsules.com/about</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2023-01-06T11:46:05.208Z</lastmod></url>
-<url><loc>https://www.capsules.com/blog</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2023-01-06T11:46:05.208Z</lastmod></url>
-<url><loc>https://www.capsules.com/tags/ECMAScript6</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2023-01-06T11:46:05.208Z</lastmod></url>
-<url><loc>https://www.capsules.com/tags/es6</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2023-01-06T11:46:05.208Z</lastmod></url>
-<url><loc>https://www.capsules.com/tags/javascript</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2023-01-06T11:46:05.208Z</lastmod></url>
-<url><loc>https://www.capsules.com/tags/deserialization</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2023-01-06T11:46:05.208Z</lastmod></url>
-<url><loc>https://www.capsules.com/tags/deserialize</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2023-01-06T11:46:05.208Z</lastmod></url>
-<url><loc>https://www.capsules.com/tags/python</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2023-01-06T11:46:05.208Z</lastmod></url>
-<url><loc>https://www.capsules.com/tags/serialization</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2023-01-06T11:46:05.208Z</lastmod></url>
-<url><loc>https://www.capsules.com/tags/serialize</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2023-01-06T11:46:05.208Z</lastmod></url>
-<url><loc>https://www.capsules.com/tags/modules</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2023-01-06T11:46:05.208Z</lastmod></url>
-<url><loc>https://www.capsules.com/tags/packages</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2023-01-06T11:46:05.208Z</lastmod></url>
-<url><loc>https://www.capsules.com/tags/dictionaries</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2023-01-06T11:46:05.208Z</lastmod></url>
-<url><loc>https://www.capsules.com/tags/sets</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2023-01-06T11:46:05.208Z</lastmod></url>
-<url><loc>https://www.capsules.com/tags/descriptors</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2023-01-06T11:46:05.208Z</lastmod></url>
-<url><loc>https://www.capsules.com/tags/coroutines</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2023-01-06T11:46:05.208Z</lastmod></url>
-<url><loc>https://www.capsules.com/blog/Coroutines 14294c3a13be4787bf042af56d8d3958</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2023-01-06T11:46:05.208Z</lastmod></url>
-<url><loc>https://www.capsules.com/blog/Descriptors 9da2b58aed7f44808be64c95ab0c8b1e</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2023-01-06T11:46:05.208Z</lastmod></url>
-<url><loc>https://www.capsules.com/blog/Dictionaries and Sets 10dfdc023dd9418996c26b729c0375e4</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2023-01-06T11:46:05.208Z</lastmod></url>
-<url><loc>https://www.capsules.com/blog/ES6</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2023-01-06T11:46:05.208Z</lastmod></url>
-<url><loc>https://www.capsules.com/blog/Modules and Packages c3cb87d757c0460686aaae6e1b81755c</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2023-01-06T11:46:05.208Z</lastmod></url>
-<url><loc>https://www.capsules.com/blog/Serialization and De-serialization a637a9f909704393b8310fd8d5b4452f</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2023-01-06T11:46:05.208Z</lastmod></url>
+<url><loc>https://www.capsules.com</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2023-05-28T15:59:35.088Z</lastmod></url>
+<url><loc>https://www.capsules.com/about</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2023-05-28T15:59:35.089Z</lastmod></url>
+<url><loc>https://www.capsules.com/blog</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2023-05-28T15:59:35.089Z</lastmod></url>
+<url><loc>https://www.capsules.com/projects</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2023-05-28T15:59:35.089Z</lastmod></url>
+<url><loc>https://www.capsules.com/tags/OOP</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2023-05-28T15:59:35.089Z</lastmod></url>
+<url><loc>https://www.capsules.com/tags/classes</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2023-05-28T15:59:35.089Z</lastmod></url>
+<url><loc>https://www.capsules.com/tags/objects</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2023-05-28T15:59:35.089Z</lastmod></url>
+<url><loc>https://www.capsules.com/tags/python</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2023-05-28T15:59:35.089Z</lastmod></url>
+<url><loc>https://www.capsules.com/tags/project</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2023-05-28T15:59:35.089Z</lastmod></url>
+<url><loc>https://www.capsules.com/tags/react</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2023-05-28T15:59:35.089Z</lastmod></url>
+<url><loc>https://www.capsules.com/blog/Classes and Objects 6225eb4528ff44f4a590c929c43b8328</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2023-05-28T15:59:35.089Z</lastmod></url>
+<url><loc>https://www.capsules.com/blog/habituate-me</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2023-05-28T15:59:35.089Z</lastmod></url>
+<url><loc>https://www.capsules.com/blog/modules_and_packages</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2023-05-28T15:59:35.089Z</lastmod></url>
+<url><loc>https://www.capsules.com/blog/movie-tracker</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2023-05-28T15:59:35.089Z</lastmod></url>
+<url><loc>https://www.capsules.com/blog/photogram</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2023-05-28T15:59:35.089Z</lastmod></url>
+<url><loc>https://www.capsules.com/blog/pi-peekaboo</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2023-05-28T15:59:35.090Z</lastmod></url>
+<url><loc>https://www.capsules.com/blog/save-this-for-me</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2023-05-28T15:59:35.090Z</lastmod></url>
+<url><loc>https://www.capsules.com/blog/stackexchange-digest</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2023-05-28T15:59:35.090Z</lastmod></url>
 </urlset>

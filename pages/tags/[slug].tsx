@@ -37,7 +37,7 @@ export default function TagPage({
     allowedStyles:
       "bg-dark-background-1 hover:bg-dark-background-3 text-light-background-1 font-semibold py-2 px-4 border border-light-sea rounded shadow mb-4",
   };
-  console.log(posts)
+  // console.log(posts)
 
   return (
     <div className="h-full">
@@ -63,7 +63,7 @@ export default function TagPage({
         </div>
       </h1>
       {/* <Posts posts={posts} tagsArray={tagsArray} /> */}
-      <Posts posts={posts.slice(0, currentIndex + 9)} tagsArray={tagsArray} />
+      <Posts posts={posts.slice(0, currentIndex + 9)} />
       <div className="flex justify-center">
         <button
           onClick={() => currentIndexSet(currentIndex + 10)}

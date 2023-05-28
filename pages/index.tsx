@@ -31,7 +31,7 @@ export default function Blog({ posts, tagsArray }: { posts: PostMetadata[], tags
 
   return (
     <>
-      <Posts posts={posts.slice(0, currentIndex + 9)} tagsArray={tagsArray} />
+      <Posts posts={posts.slice(0, currentIndex + 9)} />
       <div className="flex justify-center">
         <button
           onClick={() => currentIndexSet(currentIndex + 10)}

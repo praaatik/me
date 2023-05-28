@@ -1,0 +1,608 @@
+---
+title: Classes & Objects
+tags:
+  - classes
+  - objects
+  - OOP
+  - python
+date: 2019-12-15
+excerpt: Relating to classes and objects in Python.
+external: false
+url: ""
+project: false
+---
+
+## Classes
+
+## Objects and Classes
+
+- In a nutshell, objects are containers which,
+  - contain data (_states_ using attributes)
+  - contains functionality (_behaviors_ using methods)
+- Example, an object of `my_car` could have a states like a `brand` of Ferrari, `year` of 2010 and can have behavior like `brake`, `steer`, `accelerate`, etc.
+- Classes, also called as _type_ are used to create objects which are called _instances_ of that class.
+
+  > Classes are themselves objects. They have attributes (or state) like a class name, and they have behavior like creating instance of the class.
+
+- Classes are created from the `type` meta class.
+
+### Creating classes
+
+Using the `class` if we create class like so,
+
+```python
+class MyClass:
+    pass
+
+m1 = MyClass()
+print(type(m1), isinstance(m1, MyClass), MyClass.__name__, type(MyClass.__name__), sep="\n")
+
+# output
+"""
+<class '__main__.MyClass'>
+True
+MyClass
+<class 'str'>
+"""
+```
+
+Here, Python creates an object
+
+- called `MyClass`
+- of type `type`
+- Automatically provides certain attributes like `__name__` and methods `MyClass()` (this actually returns an instance of `MyClass`).
+
+---
+
+## `getattr`, `setattr` and `delattr`
+
+- We can get a particular attribute using the `getattr` method. Shorthand is the use of dot notation.
+
+  ```python
+  class MyClass:
+      language = 'Python'
+      version = 3.10
+
+  print(MyClass.language is getattr(MyClass, 'language'))
+  print(MyClass.version is getattr(MyClass, 'version'))
+  print(getattr(MyClass, 'isOOP', False))
+
+  """
+  True
+  True
+  False
+  """
+
+  setattr(MyClass, 'isOOP', True)
+
+  print(getattr(MyClass, 'isOOP', False) is MyClass.isOOP)    # prints True
+
+  for i in range(10):
+      setattr(MyClass, f'{i}th', f'value {i+1}')
+
+  for i in range(12):
+      print(getattr(MyClass, f'{i}th', 'N/A'))
+
+  """
+  value 1
+  value 2
+  value 3
+  value 4
+  value 5
+  value 6
+  value 7
+  value 8
+  value 9
+  value 10
+  N/A
+  N/A
+  """
+
+  print(MyClass.__dict__)
+  """
+  mappingproxy({'__module__': '__main__',
+                'language': 'Python',
+                'version': 3.1,
+                '__dict__': <attribute '__dict__' of 'MyClass' objects>,
+                '__weakref__': <attribute '__weakref__' of 'MyClass' objects>,
+                '__doc__': None,
+                'isOOP': True,
+                '0': '0',
+                '1': '1',
+                '2': '2',
+                '3': '3',
+                '4': '4',
+                '5': '5',
+                '6': '6',
+                '7': '7',
+                '8': '8',
+                '9': '9',
+                '0th': 'value 1',
+                '1th': 'value 2',
+                '2th': 'value 3',
+                '3th': 'value 4',
+                '4th': 'value 5',
+                '5th': 'value 6',
+                '6th': 'value 7',
+                '7th': 'value 8',
+                '8th': 'value 9',
+                '9th': 'value 10'
+                })
+  """
+  ```
+
+  > All the attributes are stored in a `mappingproxy` dictionary. We can’t directly mutate it, but we can do that using the `setattr` and `delattr`.
+
+This dictionary is referred to as the **namespace** of a particular class. Can get the values of the attributes in one of the 3 ways,
+
+- Preferred way, can specify a default in case the _key_ is not present.
+
+```python
+print(getattr(MyClass, 'isOOP', 'N/A')) # which returns 'N/A' if the key isOop is not present
+```
+
+- Shorthand way,
+
+```python
+print(MyClass.isOOP)
+```
+
+- Directly query the dictionary, but not preferred since all attributes might not be present in this dictionary.
+
+```python
+print(MyClass.__dict__['isOOP'])
+```
+
+<WebBookmark
+  href="https://stackoverflow.com/questions/32720492/why-is-a-class-dict-a-mappingproxy"
+  title="Why is a class dict a mapping proxy?"
+/>
+
+> In a nutshell, a `mappingproxy` makes the `class.__dict__` read-only, so that only the `class.__setattr__` is used to set class attributes.
+
+## Callables
+
+- Any functions which are defined in the class are _callables_.
+
+  ```python
+  class Program:
+      language = 'Python'
+
+      def say_hello(self):
+          print(f"Hello from {self.language}")
+
+      def hey():
+          print("hey!")
+
+  print(Program.__dict__)
+  """
+  mappingproxy({'__module__': '__main__',
+                'language': 'Python',
+                'say_hello': <function __main__.Program.say_hello(self)>,
+                'hey': <function __main__.Program.hey()>,
+                '__dict__': <attribute '__dict__' of 'Program' objects>,
+                '__weakref__': <attribute '__weakref__' of 'Program' objects>,
+                '__doc__': None})
+  """
+
+  # can call them using the namespace dictionary (although not recommended)
+  Program.__dict__['hey']()
+
+  # or using the instances
+  p1 = Program()
+  p1.say_hello()
+
+  # or like this,
+  getattr(Program, 'hey')()
+  ```
+
+  <WebBookmark
+    href="https://realpython.com/python3-object-oriented-programming/"
+    title="Object-Oriented Programming (OOP) in Python 3 - Real Python"
+  />
+
+  <WebBookmark
+    href="https://docs.python.org/3/tutorial/classes.html"
+    title="Classes - Python 3.10.2 documentation"
+  />
+
+  ## Instantiating a class
+
+- When we call a class, a class instance object is created.
+
+```python
+class MyClass:
+    pass
+
+m1 = MyClass() # creates an instance m1 of type MyClass, i.e. type(m1) == MyClass returns True
+
+class AnotherClass:
+    pass
+
+a1 = AnotherClass()
+print(a1.__dict__, a1.__class__, type(a1), isinstance(a1, AnotherClass), sep="\n")
+"""
+{}
+<class '__main__.AnotherClass'>
+<class '__main__.AnotherClass'>
+True
+"""
+```
+
+- This class instance has it’s own namespace and is distinct from the namespace of the class that was used to create the object, i.e. `m1` has a separate namespace from `MyClass`.
+- This namespace has some attributes which Python automatically implements for us including `__dict__` (_objects local namespace)_ and `__class__` (_which class was used to instantiate the object)_.
+
+## Instance Attributes and Class Attributes
+
+- Instance attributes are the values which are present in the `__dict__` for an object while class attributes are the ones present in the `__dict__` for class.
+
+```python
+class MyClass:
+    language = 'Python'
+
+m = MyClass()
+
+print(m.__dict__, MyClass.__dict__, sep='\n')
+"""
+{}
+{'__module__': '__main__', 'language': 'Python', '__dict__': <attribute '__dict__' of 'MyClass' objects>, '__weakref__': <attribute '__weakref__' of 'MyClass' objects>, '__doc__': None}
+"""
+
+m.language = 'JavaScript'
+print(m.__dict__, MyClass.__dict__, sep='\n')
+
+"""
+{'language': 'JavaScript'}
+{'__module__': '__main__', 'language': 'Python', '__dict__': <attribute '__dict__' of 'MyClass' objects>, '__weakref__': <attribute '__weakref__' of 'MyClass' objects>, '__doc__': None}
+
+"""
+```
+
+> When we get the instance attribute _(say `m.language`)_ Python first checks in the class for the definition. If not present, it would look in `type(MyClass)` if the attribute is present and so on. Goes on to the parent looking for it.
+
+## Method Objects
+
+- Method is an actual object type in Python. It is like a function, but it is callable.
+- Unlike a function, method object is actually bound to some object and that object is passed in as the first parameter of the method.
+
+> This method object does not have the parameter passed in when called using the class, but it is done so when called using the instance.
+
+```python
+class MyClass:
+    def test(*args):
+        print(f"Printing the {args}")
+
+# no parameters passed in when called using the class
+MyClass.test() # Printing the ()
+
+# parameters passed in when called using the object
+m = MyClass()
+m.test()  # Printing the (<__main__.MyClass object at 0x0000013F025050C0>,)
+```
+
+- One advantage is that `test()` now has a handle on the object’s namespace.
+- Methods are objects that combine an instance of some class and function and like any object is has a few attributes,
+- `__self__` is the instance that method is bound to.
+- `__func__` the original function defined in the class.
+- So when we call the method, `obj.method(args)` it calls `method.__func__(method.__self__, args)` so it’s calling the self first.
+- This means that we need to take into account that _extra_ argument when we define the functions in the classes. These functions are called instance methods.
+- **In a nutshell**, when we call the instance method with arguments, the method receives the instance object reference as the first argument.
+
+> **Methods** in Python have a different meaning from **functions**. Methods are functions which are dumped onto an instance of a class. Refer the code below.
+
+```python
+class Person:
+    ## the below is a function currently, when the class is intantiated, it becomes a bound method object
+    def say_hello():
+        print("Saying hello to you!")
+
+p = Person()
+hex(id(p))    # '0x293e71ad840'
+
+print(p.say_hello)    # <bound method Person.say_hello of <__main__.Person object at 0x00000293E71AD840>>
+
+# __self__ just refers to the instance of the class (p in this case)
+print(p.say_hello.__self__ == p)    # True
+```
+
+## Initializing Class Instances and using `__init__`
+
+- When we instantiate a class, by default Python does two things,
+  - creates a new instance of the class
+  - initializes the namespace of the class, i.e. gives the object it’s own `__dict__` which is **empty**.
+- We can pass in a custom initializer that Python would use using the `__init__` bound instance method.
+
+## Creating Attributes at Run-Time
+
+- Attributes can be created at runtime using the `MethodType` function from `types` module. The benefit of this is that we can create _bounded methods_ for a particular class, _having access to it’s class attributes_, from outside of the class using the object instance.
+
+```python
+from types import MethodType
+
+class MyClass:
+    age = 2
+
+# age_halfer currently is just a function
+def age_halfer(self):
+    print(f"Halfing the age now...")
+    return self.age / 2
+
+m = MyClass()
+
+print(m.__dict__)    # {}
+
+# with the below line of code, age_halfer becomes a method bound to an object
+m.age_halfer = MethodType(age_halfer, m)
+m.age_halfer()
+
+print(m.__dict__)    # {'age_halfer': <bound method age_halfer of <__main__.MyClass object at 0x000001F6863D48E0>>}
+```
+
+## Properties
+
+- We can create **managed attributes** using the `property()`.
+- Usually used with _getters_ and _setters_ in the class for an attribute.
+- Useful when we need to make some computation to the attribute before setting or getting it.
+
+```python
+class Person:
+    """This is a Person object
+    """
+    def __init__(self, name):
+        self._name = name
+
+    def set_name(self, name):
+      if isinstance(name, str) and len(name.strip()) > 0 and isinstance(name, int):
+        self._name = name
+      else:
+        print("Name cannot be a non-empty string or number")
+
+    def get_name(self):
+      print(f"Getting the name: {self._name}.")
+
+      return self._name
+
+    def del_name(self):
+      print(f"Deleting the name: {self._name}")
+      del self._name
+
+    name = property(fget=get_name, fset=set_name, fdel=del_name, doc="The person's name docstring, only for the name not for any other attribute")
+```
+
+```python
+class Point:
+    def __init__(self, x, y, admin=False):
+        self._x = x
+        self._y = y
+        self._admin = admin
+
+    def get_x(self):
+        if(self._admin):
+            print("Getting the value of x.\n")
+            return self._x
+        else:
+            print("Not authorized!")
+
+    def get_y(self):
+        if(self._admin):
+            print("Getting the value of y.\n")
+            return self._y
+        else:
+            print("Not authorized!")
+
+    def set_x(self, x):
+        if(self._admin) and x > 0:
+            print(f"Setting the value of x to {x}")
+            self._x = x
+        else:
+            print("Authentication error.")
+
+    def set_y(self, y):
+        if(self._admin) and y > 0:
+            print(f"Setting the value of y to {y}")
+            self._y = y
+        else:
+            print("Authentication error.")
+
+    x = property(fget=get_x, fset=set_x)
+    y = property(fget=get_y, fset=set_y)
+```
+
+## Deleting Properties
+
+- Properties can be deleted using the `@property_name.deleter` decorator.
+- Consider the example below,
+
+  ```python
+  class UnitCirle:
+      def __init__(self, color):
+          self._color = color
+
+      @property
+      def color(self):
+          print("getting the color")
+          return self._color
+
+      @color.deleter
+      def color(self):
+          print("deleting the color")
+          del self._color
+
+      @color.setter
+      def color(self, value):
+          print("setting the color")
+          self._color = value
+  ```
+
+> Note that this does not delete the Class attribute but deletes the instance attribute. Trying to get the instance attribute _after_ deleting it results in an `AttributeError`.
+
+## Class and Static Methods
+
+- When we define a function in a class, how we call it alters the behavior of the function,
+  ```python
+  class MyClass:
+  	def hello():
+  		pass
+  ```
+  - If we call it like, `MyClass.hello` it is just a _plain function_.
+  - If we call it using an instance, `m = MyClass(); m.hello` it would be a _method bound_ to an object `m`.
+- Instead now to create a function which would be _bound to_ Class in either cases, we use the `@classmethod` decorator. In that case, however we call it, it would be bound to `MyClass` in the above example.
+
+  ```python
+  class MyClass:
+      def hello():
+          print("hello")
+
+      def inst_hello(self):
+          print(f"hello from {self}")
+
+      @classmethod
+      def cls_hello(cls):
+          print(f"hello from {cls}")
+
+      @staticmethod
+      def help():
+          print("help called")
+  ```
+
+| Function Name | MyClass               | Instance                 | Comments                                   | Arguments                                                                                                     |
+| ------------- | --------------------- | ------------------------ | ------------------------------------------ | ------------------------------------------------------------------------------------------------------------- |
+| hello         | regular function here | method bound to instance | Call will fail since no self in arguments. | N/A                                                                                                           |
+| inst_hello    | regular function here | method bound to instance | Call will work                             | Function bound to instance when called from instance - will receive instance as the first parameter           |
+| cls_hello     | method bound to class | method bound to class    | Call will work                             | function bound to class when called from either class or instance - will receive class as the first parameter |
+| help          | regular function here | regular function here    | Call will work                             | Static method is never bound to anything - receives no extra argument no matter how it is called.             |
+
+- Now, if we want functions which are not bound to anything, neither a class nor an instance, we use `@staticmethod` decorator.
+
+> Class Methods accept the `cls` parameter which points to the class itself and not the object instance. Because of this, they don’t modify the instance states directly (as that requires `self`) but modify the class states which applies to all the instances of the class.
+
+> Another way to look at the _class methods_ is that they allow to define alternative constructors for the classes.
+
+[Difference between @staticmethod and @classmethod](https://stackoverflow.com/a/36798076/6438526)
+
+## Scopes for Classes
+
+- Variables are stored inside the class scope.
+- Functions inside of classes are stored inside of module level.
+- When looking up for a variable inside of a class, Python looks in the class scope first and then in the module scope.
+- When looking up a function inside of a class, Python looks in the module scope directly.
+- Example code with explanation
+
+  ```python
+  class Account:
+      COMP_FRQ = 12
+      APR = 0.02
+      APY = (1 + APR/COMP_FRQ) ** COMP_FRQ - 1
+
+      def __init__(self, balance):
+          self.balance = balance
+
+      def monthly_interest(self):
+          """
+          This works since we are using a bound method to refer to the class variable.
+          """
+          return self.balance * self.APY
+
+      @classmethod
+      def monthly_interest_2(cls, amount):
+          """
+          This works as well since we are using the class instance to refer to the APY class variable.
+          """
+          return amount * cls.APY
+
+      @staticmethod
+      def monthly_interest_3(amount):
+          """
+          This works as well because we are actually using the classname (Account) to refer to the class variable.
+          Note that Python would look in the module if it does not find APY in here, i.e. without a Account
+          """
+          return amount * Account.APY
+
+      def monthly_interest_4(amount):
+          """
+          This would not work because Python does not find APY in the module level (since these functions are stored in module level).
+          """
+          return amount * APY
+  ```
+
+## Weird Example
+
+```python
+name = 'Mikki'
+
+class MyClass:
+    name = 'Kitty'
+    list_1 = [name] * 3
+    list_2 = [name for i in range(2)]
+
+    @classmethod
+    def hello(cls):
+        return f'{name} says hello'
+
+print(MyClass.hello(), MyClass.list_1, MyClass.list_2, sep="\n")
+
+"""
+Mikki says hello
+['Kitty', 'Kitty', 'Kitty']
+['Mikki', 'Mikki']
+"""
+```
+
+# Recap
+
+```python
+class Circle:
+
+    """
+    - class atrribute
+    - can be called using -> Circle.origin
+    """
+    origin = (0, 0)
+
+    def __init__(self, r):
+        """
+        - Custom initializer
+        - instance method (bound to instance)
+        """
+        self._r = r
+
+    @staticmethod
+    def create_unit_circle():
+        """
+        - static method, not bound to anything
+        """
+        return Circle(1)
+
+    @classmethod
+    def set_origin(cls, x, y):
+        """
+        - class method
+        - bound to class
+        - can be called using
+            - Circle.set_origin(0, 0)
+            - c.set_origin(0, 0)
+        """
+        cls.origin = (x, y)
+
+    def double_radius(self):
+        """
+        - instance method
+        - bound to instance
+        - can be called using - c.double_radius()
+        """
+        self._r *= 2
+
+    @property
+    def radius(self):
+        """
+        - instance property (radius) with getter method
+        """
+        return self._r
+
+    @radius.setter
+    def radius(self, value):
+        """
+        - instance property (radius) with setter method
+        """
+        self._r = value
+```

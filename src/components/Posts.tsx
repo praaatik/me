@@ -1,14 +1,21 @@
 import Link from "next/link";
 import styles from "@/styles/Articles.module.css";
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FaExternalLinkAlt } from "react-icons/fa";
 import CustomLink from "./CustomLink";
 import { ThemeContext } from "pages/_app";
 import IPostStyles from "../interfaces/IPostStyles";
 import { PostMetadata } from "../interfaces/PostMetadata";
 
-export default function Posts({ posts, tagsArray }: { posts: PostMetadata[], tagsArray: String[] }) {
+export default function Posts({ posts }: { posts: PostMetadata[] }) {
   const context = useContext(ThemeContext);
+  const [tags, tagsSet] = useState<string[]>();
+
+  useEffect(() => {
+    posts.map((post) => {
+      tagsSet((tags) => [...new Set(tags), ...new Set(post?.tags)]);
+    });
+  }, []);
 
   const darkStyles: IPostStyles = {
     tagsMetadataStyles:
@@ -50,7 +57,7 @@ export default function Posts({ posts, tagsArray }: { posts: PostMetadata[], tag
         </h2>
         <ul className="grid grid-cols-2">
           {
-            tagsArray.map((tag) => {
+            tags?.map((tag) => {
               return <CustomLink href={`/tags/${tag}`} key={tag.toString()} isExternal={false}>
                 <li
                   key={tag.toString()}

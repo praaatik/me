@@ -1,10 +1,11 @@
 import { getAllPosts } from "@/src/api";
 import Posts from "@/src/components/Posts";
+// import Posts from "@/src/components/Posts";
 import { PostMetadata } from "@/src/interfaces/PostMetadata";
 import { ThemeContext } from "pages/_app";
 import React, { useContext, useState } from "react";
 
-export default function Blog({ posts, tagsArray }: { posts: PostMetadata[], tagsArray: String[] }) {
+export default function Blog({ posts }: { posts: PostMetadata[] }) {
   const [currentIndex, currentIndexSet] = useState(0);
   const context = useContext(ThemeContext);
 
@@ -31,7 +32,7 @@ export default function Blog({ posts, tagsArray }: { posts: PostMetadata[], tags
 
   return (
     <>
-      <Posts posts={posts.slice(0, currentIndex + 9)} tagsArray={tagsArray} />
+      <Posts posts={posts.slice(0, currentIndex + 9)} />
       <div className="flex justify-center">
         <button
           onClick={() => currentIndexSet(currentIndex + 10)}
@@ -57,6 +58,3 @@ export async function getStaticProps() {
 
   return { props: { posts } };
 }
-
-
-///home/pratikk/me/pages/blog/index.tsx

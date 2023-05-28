@@ -1,11 +1,10 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { ThemeContext } from 'pages/_app'
+import { projects } from 'projects'
 import React, { useContext } from 'react'
 import { AiFillGithub } from "react-icons/ai"
 import { CiPlay1 } from "react-icons/ci"
-import { projects } from './projects'
-
 
 const Project = () => {
     const context = useContext(ThemeContext);
@@ -25,15 +24,15 @@ const Project = () => {
                     projects.map(project => {
                         return <div className="flex justify-between border-2 border-light-sea p-4 w-11/12 my-2" key={project.id}>
                             <div>
-                                <Link href={project.pageUrl} passHref>
+                                <Link href={project.blogURL} passHref>
                                     <div>{project.title}</div>
                                 </Link>
                                 <div>{project.subtitle}</div>
                                 <div className="flex justify-evenly mt-2">
-                                    {project.demo && <a href={project.demo} rel="noopener noreferrer" target="_blank">
+                                    {project.demoURL && <a href={project.demoURL} rel="noopener noreferrer" target="_blank">
                                         <CiPlay1 className="w-7 h-7" />
                                     </a>}
-                                    {project.github && <a href={project.github} rel="noopener noreferrer" target="_blank">
+                                    {project.githubURL && <a href={project.githubURL} rel="noopener noreferrer" target="_blank">
                                         <AiFillGithub className="w-7 h-7" />
                                     </a>}
                                 </div>
