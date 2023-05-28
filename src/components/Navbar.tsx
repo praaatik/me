@@ -1,11 +1,10 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ThemeContext } from "pages/_app";
 import React, { useContext } from "react";
 import { useState } from "react";
 import { FiMoon, FiSun } from "react-icons/fi";
 import INavbarStyles from "../interfaces/INavbarStyles";
-import PratikKulkarniBlack from "../../styles/images/pratik_kulkarni_black.svg";
-import Image from "next/image";
 
 const Navbar = () => {
   const links = [
@@ -102,6 +101,7 @@ const Navbar = () => {
             <div className=" flex w-full justify-around items-end sm:items-center sm:justify-between">
               <Link href="/" passHref>
                 <div className="hover:cursor-pointer">
+
                   <img
                     src={
                       context?.isThemeDark

@@ -1,4 +1,3 @@
-import Project from "@/src/components/Project";
 import { ThemeContext } from "pages/_app";
 import { useContext } from "react";
 import { AiFillGithub, AiFillMail } from "react-icons/ai";
