@@ -25,9 +25,6 @@ import MDXPost from "@/src/interfaces/MDXPost";
 export default function PostPage({ post }: { post: MDXPost }) {
   const context = useContext(ThemeContext);
 
-  useEffect(() => {
-    console.log(post.metadata)
-  }, [])
 
   const lightStyles: IPostPageStyles = {
     titleStyle:

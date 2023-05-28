@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   list-style: none;
+  /* width: 50rem; */
 }
 
 .list li {
@@ -15,9 +16,11 @@
 .tags {
   font-size: 0.75rem;
 }
+
 .tags a:after {
   content: " . ";
 }
+
 .tags a:last-child:after {
   content: "";
 }

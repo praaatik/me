@@ -1,6 +1,6 @@
 import Link from "next/link";
 import styles from "@/styles/Articles.module.css";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { FaExternalLinkAlt } from "react-icons/fa";
 import CustomLink from "./CustomLink";
 import { ThemeContext } from "pages/_app";
@@ -51,7 +51,6 @@ export default function Posts({ posts, tagsArray }: { posts: PostMetadata[], tag
         <ul className="grid grid-cols-2">
           {
             tagsArray.map((tag) => {
-              console.log(tag);
               return <CustomLink href={`/tags/${tag}`} key={tag.toString()} isExternal={false}>
                 <li
                   key={tag.toString()}
@@ -76,7 +75,7 @@ export default function Posts({ posts, tagsArray }: { posts: PostMetadata[], tag
               : lightStyles.postsHeaderStyles
           }
         >
-          Posts
+          Posts & Notes
         </h1>
         <ul className={styles.list}>
           {posts.map((post) => {

@@ -5,16 +5,16 @@ import { ThemeContext } from "pages/_app";
 import React, { useContext, useState } from "react";
 
 export default function Blog({ posts, tagsArray }: { posts: PostMetadata[], tagsArray: String[] }) {
-  const [currentIndex, currentIndexSet] = useState(0);
+  const [currentIndex, currentIndexSet] = useState(posts.length >= 9 ? 0 : posts.length);
   const context = useContext(ThemeContext);
 
   interface ILoadPostsButtonStyles {
     allowedStyles: string;
-    nowAllowedStyles: string;
+    notAllowedStyles: string;
   }
 
   const lightStyles: ILoadPostsButtonStyles = {
-    nowAllowedStyles:
+    notAllowedStyles:
       "bg-light-background-1 hover:bg-light-background-1 text-dark-background-1 font-semibold py-2 px-4 border-2 border-light-sea rounded shadow hover:cursor-not-allowed mb-4 ",
 
     allowedStyles:
@@ -22,7 +22,7 @@ export default function Blog({ posts, tagsArray }: { posts: PostMetadata[], tags
   };
 
   const darkStyles: ILoadPostsButtonStyles = {
-    nowAllowedStyles:
+    notAllowedStyles:
       "bg-dark-background-1 hover:bg-dark-background-1 text-light-background-1 font-semibold py-2 px-4 border border-light-sea rounded shadow hover:cursor-not-allowed mb-4 ",
 
     allowedStyles:
@@ -37,11 +37,11 @@ export default function Blog({ posts, tagsArray }: { posts: PostMetadata[], tags
           onClick={() => currentIndexSet(currentIndex + 10)}
           className={
             context?.isThemeDark
-              ? currentIndex > posts?.length
-                ? darkStyles?.nowAllowedStyles
+              ? currentIndex >= posts?.length
+                ? darkStyles?.notAllowedStyles
                 : darkStyles?.allowedStyles
-              : currentIndex > posts?.length
-                ? lightStyles?.nowAllowedStyles
+              : currentIndex >= posts?.length
+                ? lightStyles?.notAllowedStyles
                 : lightStyles?.allowedStyles
           }
         >

@@ -1,0 +1,292 @@
+---
+title: Modules and packages
+tags:
+  - python
+  - modules
+  - packages
+date: 2019-12-15
+excerpt: This is a blog relating to modules and packages in Python.
+external: false
+url: ""
+project: false
+---
+
+# Modules and Packages
+
+In Python, a module is simply a file containing Python definitions, statements, and functions. It provides a way to organize and reuse code across different projects. In this post, we'll explore how Python imports modules and different ways of importing modules.
+
+## How Python Imports Modules?
+
+Python imports modules at _runtime_. When we import a module, Python looks for it in the `sys.path` location. The `import` fails if no modules are found in this path.
+
+In essence, the import process involves the following steps:
+
+- Python checks the `sys.modules` cache to see if the module is already present.
+- If not present, Python creates a new module object of type `types.ModuleType`.
+- Python loads the entry from the source file, which involves executing the source files.
+
+## Variants of Importing
+
+### `import` statement
+
+The most basic way of importing a module is using the `import` statement. For instance, if we want to import the `math` module, we can do so using the following:
+`import math`
+
+If the math module is not in the `sys.modules` cache, Python loads it and inserts a reference to it in `sys.modules`. Then, it adds the name math in the _global namespace_, referencing the same object.
+
+### `import` with an alias
+
+We can also import a module using an alias; this import is applicable when we want to use a different name for the module in our code. To import the `math` module with an alias `m`, we use:
+
+`import math as m`
+
+Here, Python does the same thing as before, but instead of adding the name math in the global namespace, it adds the alias `m`.
+
+### `from` Import
+
+The `from` import statement allows us to import _specific names_ from a module. For instance, to import the `sqrt` function from the `math` module, we can use the following:
+
+```py
+from math import sqrt
+```
+
+If the `math` module is not in the `sys.modules` cache, Python loads it and inserts a reference to it in `sys.modules`. Then, it adds the name `sqrt` in the _global namespace_, referencing the same object. Only the `sqrt` function is in the _global_ namespace, not the `math` module itself.
+
+### `from` Import with an Alias
+
+Similar to the import statement, we can use an alias while importing specific names from a module using the `from` import statement. To import the `sqrt` function from the math module with an alias `s`, we use:
+
+```py
+from math import sqrt as s
+```
+
+Python does the same thing as before, but instead of adding the name `sqrt` in the _global namespace_, it adds the alias `s`.
+
+### Wildcard from Import
+
+Finally, we can use wildcard `*` to import all the names from a module. For instance, to import all the names from the `math` module, we can use the following:
+
+`from math import *`
+
+Here, Python does the same thing as before, but instead of importing only specific names, it imports all the names from the math module.
+
+Note that using wildcard import statement is not recommended as it may lead to naming conflicts and may not be easily understandable. It is always better to use specific import statements and avoid wildcard imports.
+
+```py
+import math # basic import statement
+
+# if the math module is not present in `sys.modules` cache, Python loads it and inserts a reference to it in sys.modules
+# Then, it adds the name math in the global namespace, referencing the same object
+
+import math as m # import with an alias
+
+# similar to basic import statement, but adds an alias m instead of the module name math in the global namespace
+
+from math import sqrt # from import statement
+
+# if math module is not present in the `sys.modules` cache, Python loads it and inserts a reference to it in sys.modules
+# Then, it adds the name sqrt in the global namespace, referencing the same object
+
+from math import sqrt as s # from import statement with an alias
+
+# similar to from import statement, but adds an alias s instead of the function name sqrt in the global namespace
+
+from math import * # wildcard from import
+
+# imports all the names from the math module and adds them to the global namespace
+# not recommended as it may lead to naming conflicts and may not be easily understandable,
+# it's always better to use specific import statements and avoid wildcard imports
+```
+
+<aside>
+  💡 You can check if a type is a built-in type by using the `importlib` module.
+</aside>
+
+## Finders and Loaders
+
+When Python looks for a module, it first searches for it using a finder. You can list the available finders using the `sys.meta_path` attribute:
+
+```py
+import sys
+print(sys.meta_path)
+
+# Output: [\_frozen_importlib.BuiltinImporter,
+
+# \_frozen_importlib.FrozenImporter,
+
+# \_frozen_importlib_external.PathFinder,
+
+# <six.\_SixMetaPathImporter at 0x291ba50fb20>]
+```
+
+If the module is found, the spec is returned by the finder. For example:
+
+```py
+import math
+print(math.__spec__)
+
+# Output: ModuleSpec(name='math', loader=<class '\_frozen_importlib.BuiltinImporter'>, origin='built-in')
+
+# OR
+
+import importlib
+importlib.util.find_spec('math')
+importlib.util.find_spec('math') == math.__spec__ # True
+```
+
+Once you have the specs, the loader comes into play and loads the module from the specified origin location.
+
+<aside>
+  Once you import a module, the module name is added to the namespace as seen in
+  the `globals()` dictionary.
+</aside>
+
+You can find the locations where the finders look for modules in the `sys.path` list. If you're unable to find a module, you can add its location to `sys.path` like this:
+
+```py
+import sys
+sys.path.append(some_folder_location)
+```
+
+### Reloading a Module
+
+Reload a module by using the `importlib` library:
+
+```py
+import importlib
+import math
+
+initialId = id(sys.modules['math']) # gives an id
+importlib.reload(math)
+newId = id(sys.modules['math']) # gives an id again
+
+print(initialId == newId) # same but now reloaded
+```
+
+### Demo
+
+This below piece of code demonstrates the usage of the `sys.meta_path`, `importlib.util.find_spec`, `sys.path`, and `importlib.reload` to find, load, and reload modules in Python.
+
+```py
+# finder_demo.py
+
+## import the sys module, which provides access to some variables used by the interpreter
+import sys
+import importlib
+import math
+
+## Print available finders
+print(sys.meta_path)
+
+## Find and print module spec for math module
+## returns None if the module is not found or a ModuleSpec instance if found.
+
+math_spec = importlib.util.find_spec('math')
+print(math_spec)
+
+# These are a list of directories that Python looks for when importing modules
+print(sys.path)
+
+# Reload the math module and print whether the IDs are the same, it should return True
+math_initial_id = id(sys.modules['math'])
+importlib.reload(math)
+math_new_id = id(sys.modules['math'])
+
+print(math_initial_id == math_new_id)
+```
+
+```sh
+[
+    <class '_frozen_importlib.BuiltinImporter'>,
+    <class '_frozen_importlib.FrozenImporter'>,
+    <class '_frozen_importlib_external.PathFinder'>,
+    <six._SixMetaPathImporter object at 0x7f65734f67f0>
+]
+ModuleSpec(name='math', loader=<class '_frozen_importlib.BuiltinImporter'>, origin='built-in')
+['/home/pk/Documents/playground/modules_packages_python', '/usr/lib/python310.zip', '/usr/lib/python3.10', '/usr/lib/python3.10/lib-dynload', '/home/pk/.local/lib/python3.10/site-packages', '/usr/lib/python3.10/site-packages']
+True
+```
+
+## Packages
+
+### Basics
+
+Packages are modules that can contain sub-modules or sub-packages. The code for the package, since it is a module after all, goes in a file called `__init__.py`. Think of them like a directory where the directory name becomes the package name.
+
+### To create a Python package:
+
+- Create an `__init__.py` file.
+- Create a directory with the name that will be the package name.
+
+### How They Differ from Modules
+
+If you check the type of any package, it will still be a module. However, packages have the following dunder properties:
+
+- `__file__` - the location of the `__init__.py` file
+- `__package__` - the package name, i.e. the name of the directory in which it is located
+- `__path__` - the path of the directory in which it is located
+
+On the other hand, modules have the following:
+
+- `__package__` - the name of the package it is inside of (empty in case of nothing)
+- `__file__` - the file path, module
+
+### Demo
+
+This piece of code demonstrates how to work with packages and modules in Python.
+
+In `package_demo.py`, the package `mypackage` and its sub-module `mymodule` are imported using import `mypackage.mymodule`.
+
+```py
+# package_demo.py
+
+# Import package and sub-module
+import mypackage.mymodule
+
+# Print package properties
+print(type(mypackage))
+print(mypackage.__file__)
+print(mypackage.__package__)
+print(mypackage.__path__)
+
+# Print module properties
+print(type(mypackage.mymodule))
+print(mypackage.mymodule.__file__)
+print(mypackage.mymodule.__package__)
+```
+
+```py
+# mypackage/mymodule.py
+
+print("Inside mymodule")
+```
+
+```py
+# mypackage/**init**.py
+
+print("Initializing mypackage")
+```
+
+Output -
+
+```sh
+Initializing mypackage
+Inside mymodule
+<class 'module'>
+/home/pk/Documents/playground/modules_packages_python/mypackage/__init__.py
+mypackage
+['/home/pk/Documents/playground/modules_packages_python/mypackage']
+<class 'module'>
+/home/pk/Documents/playground/modules_packages_python/mypackage/mymodule.py
+mypackage
+```
+
+## Conclusion
+
+So this was an overview of packages and modules in Python. Python modules are files containing Python definitions, statements, and functions, which provide a way to organize and reuse code across different projects. When we import a module in Python, it looks for it in the `sys.path` location, and if it is not found in this path, the `import` fails. We saw the different ways of importing a module, such as using the `import` statement, import with an alias, `from` import, `from` import with an alias, and wildcard `from` import.
+
+The article also covers the difference between built-in and non-built-in types in Python. You can check if a type is a built-in type by using the importlib module. Additionally, the article discusses finders and loaders and how Python looks for a module. If you cannot find a module, add its location to `sys.path` using `sys.path.append(some_folder_location)`.
+
+Finally, the article discusses reloading a module and packages in Python. A package is simply a way of organizing modules hierarchically. It involves creating a directory hierarchy and placing Python modules inside these directories. We can then use the `import` statement to import a module from a package, and Python will automatically search for the module in the directories in the hierarchy.
+
+In conclusion, understanding modules and packages in Python is crucial to writing efficient and reusable code across different projects.

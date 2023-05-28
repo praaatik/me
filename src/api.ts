@@ -75,7 +75,6 @@ export const getHeadings = async (post: string, metadata: PostMetadata) => {
     let url = `${metadata?.slug}#${heading.toLowerCase().split(" ").join("-")}`;
 
     if (url.includes(".")) {
-      console.log(url);
       url = url.split(".").join("");
     }
     if (url.includes("`")) {

@@ -16,12 +16,9 @@ const ScrollToTop = () => {
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
-      console.log("are we here?");
       if (window.scrollY > 400) {
-        console.log("or here?");
         showButtonSet(true);
       } else {
-        console.log("or maybe here?");
         showButtonSet(false);
       }
     });

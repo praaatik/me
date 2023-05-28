@@ -1,11 +1,11 @@
 import type { AppProps } from "next/app";
-import Link from "next/link";
+// import Link from "next/link";
 import Head from "next/head";
 import "@/styles/globals.css";
 import React, { useEffect, useState } from "react";
 import Navbar from "../src/components/Navbar";
 import ScrollToTop from "@/src/components/ScrollToTop";
-import Project from "@/src/components/Project";
+// import Project from "@/src/components/Project";
 
 interface IThemeContext {
   isThemeDark: boolean;
